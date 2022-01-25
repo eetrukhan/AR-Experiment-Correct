@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/OLD/OLDMainMenu.unity
+    guid: 497e59c96d0de254da23a5f2ae967c02
+  - enabled: 1
+    path: Assets/Scenes/AroundMobile.unity
+    guid: 7f597ca353dbf4d5d84b41be20f737bb
+  - enabled: 1
+    path: Assets/Scenes/AroundMobileMono.unity
+    guid: 5b5c225aae54d435fa274c1affc3e07c
+  - enabled: 1
+    path: Assets/Scenes/AroundStickersMono.unity
+    guid: 458eb04e478e6452b902e74a872131c0
+  - enabled: 1
+    path: Assets/Scenes/AroundStickers.unity
+    guid: 508731822f9b9439292353485546abcd
+  - enabled: 1
+    path: Assets/Scenes/OLD/OLDHiddenWaves.unity
+    guid: 49fc158929663494bb12d3be7ce37573
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 96aa870be7e0a6e468f50a17c2762f67
+  - enabled: 1
+    path: Assets/Scenes/InFrontOfMobile.unity
+    guid: 6e20f4cff716d4449899b6eac5cd422a
+  - enabled: 1
+    path: Assets/Scenes/InFrontOfStickers.unity
+    guid: 56faff5a6939453429487371c5d6f1d1
+  - enabled: 1
+    path: Assets/Scenes/HiddenWaves.unity
+    guid: 2453dc03c79a6b34d80db9f30e3744a3
+  m_configObjects: {}
