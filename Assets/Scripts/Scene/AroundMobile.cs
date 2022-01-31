@@ -22,6 +22,7 @@ namespace Logic
         public Material yellow;
         public Material green;
         public Material grey;
+        
 
         public delegate GameObject Generator(GameObject prefabToCreate, Notification notification,
                                           Vector3 position, Vector3 scale, Quaternion rotation,
@@ -40,12 +41,14 @@ namespace Logic
 
         private void hideTimer()
         {
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(false);
+           // UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(false);
+           timer.SetActive(false);
         }
 
         private void showTimer()
         {
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(true);
+           // UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(true);
+           timer.SetActive(true);
         }
 
         private void showTray()
@@ -129,7 +132,8 @@ namespace Logic
                                               doesHaveGroupIconTray);
                         try
                         {
-                            trayN.transform.parent = trayHolder.transform;
+                            //trayN.transform.parent = trayHolder.transform;
+                            trayN.transform.SetParent(trayHolder.transform);
                             trayN.transform.localPosition = position;
                             trayN.transform.localRotation = rotation;
                         }
@@ -160,7 +164,8 @@ namespace Logic
                                               rotation,
                                               doesHaveGroupIcon);
                         GameObject trayN = Instantiate(n);
-                        n.transform.parent = notificationsHolder.transform;
+                        //n.transform.parent = notificationsHolder.transform;
+                        n.transform.SetParent(notificationsHolder.transform);
                         n.transform.localPosition = position;
                         n.transform.localRotation = rotation;
                         usualCoordinatesIndex += 1;

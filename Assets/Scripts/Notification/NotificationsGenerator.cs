@@ -6,7 +6,7 @@ namespace Logic
     public class NotificationsGenerator
     {
         private System.Random random = new System.Random();
-        private const int sourcesNumber = 4;
+        private const int sourcesNumber = 1; //4
 
         private int mapNameToIndex()
         {
@@ -44,14 +44,17 @@ namespace Logic
 
         public Notification getNotification(bool generateHaveToAct)
         {
-            int sourceIndex = random.Next(0, sourcesNumber);
-            bool isSilent = random.Next(0, 2) == 0;
+            //int sourceIndex = random.Next(0, sourcesNumber);
+            int sourceIndex = 0;
+            //bool isSilent = random.Next(0, 2) == 0;
+            bool isSilent = false;
             if (generateHaveToAct)
             {
-                sourceIndex = mapNameToIndex();
+               // sourceIndex = mapNameToIndex();
                 isSilent = false;
             }
             string id = Guid.NewGuid().ToString();
+            Debug.Log(sourceIndex);
             NotificationSource notificationSource = (NotificationSource)Enum.GetValues(typeof(NotificationSource)).GetValue(sourceIndex);
             string sourceName = EnumDescription.getDescription(notificationSource);
             NotificationImage notificationImage = (NotificationImage)Enum.GetValues(typeof(NotificationImage)).GetValue(sourceIndex);
@@ -64,6 +67,7 @@ namespace Logic
             {
                 authorIndex = mapAuthorToIndex();
             }
+            Debug.Log(authorIndex);
             NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(authorIndex);
             string author = EnumDescription.getDescription(notificationAuthor);
             values = Enum.GetValues(typeof(NotificationIcon));
@@ -82,11 +86,11 @@ namespace Logic
                 NotificationText notificationText = (NotificationText)values.GetValue(random.Next(values.Length));
                 text = EnumDescription.getDescription(notificationText);
             }
-            if (isSilent)
+           /* if (isSilent)
             {
                 sourceColor = EnumDescription.getColor(EnumDescription.getDescription(NotificationColor.Silent));
                 sourceImage = "_silent_";
-            }
+            }*/
             long timestamp = DateTime.Now.Ticks;
             Notification notification = new Notification(id, sourceImage, sourceName, author, icon, text, timestamp, isSilent, sourceColor, generateHaveToAct);
             Debug.Log(string.Format("Notification which is {0} and has the following data: {1} was created", generateHaveToAct ? "correct" : "incorrect", notification));

@@ -5,8 +5,8 @@ namespace Logic
     public enum NotificationImage
     {
         [Description("telegram")]
-        Telegram,
-        [Description("whatsapp")]
+        Telegram
+       /* [Description("whatsapp")]
         WhatsApp,
         [Description("yandexpost")]
         YandexPost,
@@ -14,6 +14,7 @@ namespace Logic
         YouTube,
         [Description("_silent_")]
         Silent
+        */
     }
 }
 

@@ -4,25 +4,58 @@ namespace Logic
 {
     public enum NotificationAuthor
     {
-        [Description("Александр")]
+      /*  [Description("Маша")]
         text1,
-        [Description("Алексей")]
+        [Description("Вика")]
         text2,
-        [Description("Анатолий")]
-	    text3,
-        [Description("Андрей")]
+        [Description("Таня")]
+        text3,
+        [Description("Галя")]
         text4,
-        [Description("Антон")]
+        [Description("Катя")]
         text5,
-        [Description("Анастасия")]
+        [Description("Соня")]
         text6,
-        [Description("Елена")]
+        [Description("Даша")]
         text7,
-        [Description("Елизавета")]
+        [Description("Лера")]
         text8,
-        [Description("Зинаида")]
+        [Description("Миша")]
         text9,
-        [Description("Виктория")]
+        [Description("Витя")]
         text10
+         [Description("Тима")]
+        text11,
+        [Description("Гоша")]
+        text12,
+        [Description("Коля")]
+        text13,
+        [Description("Сева")]
+        text14,
+        [Description("Дима")]
+        text15,
+        [Description("Леша")]
+        text16
+        */
+         [Description("Александр")]
+         text1,
+         [Description("Алексей")]
+         text2,
+         [Description("Анатолий")]
+         text3,
+         [Description("Андрей")]
+         text4,
+         [Description("Антон")]
+         text5,
+         [Description("Анастасия")]
+         text6,
+         [Description("Елена")]
+         text7,
+         [Description("Елизавета")]
+         text8,
+         [Description("Зинаида")]
+         text9,
+         [Description("Виктория")]
+         text10
     }
 }

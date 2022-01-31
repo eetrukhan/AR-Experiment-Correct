@@ -5,8 +5,8 @@ namespace Logic
     public enum NotificationColor
     {
         [Description("Blue")]
-        Telegram,
-        [Description("Green")]
+        Telegram
+       /* [Description("Green")]
         WhatsApp,
         [Description("Yellow")]
         YandexPost,
@@ -14,5 +14,6 @@ namespace Logic
         YouTube,
 		[Description("Gray")]
 		Silent
+		*/
 	}
 }

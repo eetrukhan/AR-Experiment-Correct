@@ -23,12 +23,14 @@ public class WorldMapManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        save.SetActive(true);
-        load.SetActive(false);
-        UnityARSessionNativeInterface.ARFrameUpdatedEvent += OnFrameUpdate;
-        UnityARSessionNativeInterface.ARSessionInterruptedEvent += OnARInterrupted;
+	    startExperiment();
+       // save.SetActive(true);
+       // load.SetActive(false);
+      //  UnityARSessionNativeInterface.ARFrameUpdatedEvent += OnFrameUpdate;
+       // UnityARSessionNativeInterface.ARSessionInterruptedEvent += OnARInterrupted;
     }
 
+    /*
     void OnDisable()
     {
         UnityARSessionNativeInterface.ARFrameUpdatedEvent -= OnFrameUpdate;
@@ -159,12 +161,12 @@ public class WorldMapManager : MonoBehaviour
 		}
 
 	}
-
+*/
     private void startExperiment()
     {
         GameObject.Find("Canvas").SetActive(false);
-        FindObjectOfType<GlobalAround>().position = cube.transform.position;
-        cube.SetActive(false);
+       // FindObjectOfType<GlobalAround>().position = cube.transform.position;
+       // cube.SetActive(false);
         FindObjectOfType<GeneratorRunner>().isRunning = true;
     }
 }
