@@ -67,7 +67,8 @@ namespace Logic
 
         public void NextTrialExperiment(int SubjectNumber, string Design, int TrialNumber, float Time,
             int NotificationsNumber, int NumberOfHaveToActNotifications, int NumberOfNonIgnoredHaveToActNotifications,
-            float SumOfReactionTimeToNonIgnoredHaveToActNotifications, int NumberOfInCorrectlyActedNotifications)
+            float SumOfReactionTimeToNonIgnoredHaveToActNotifications, int NumberOfInCorrectlyActedNotifications,
+            float SumOfAllReactionTime, int NumberOfCorrectReactedHaveToHideNotifications)
         {
             // Fool proffing
             if (_currentTrialData != null)
@@ -83,6 +84,8 @@ namespace Logic
             _currentTrialData.NumberOfNonIgnoredHaveToActNotifications = NumberOfNonIgnoredHaveToActNotifications;
             _currentTrialData.SumOfReactionTimeToNonIgnoredHaveToActNotifications = SumOfReactionTimeToNonIgnoredHaveToActNotifications;
             _currentTrialData.NumberOfInCorrectlyActedNotifications = NumberOfInCorrectlyActedNotifications;
+            _currentTrialData.sumOfAllReactionTime = SumOfAllReactionTime;
+            _currentTrialData.numberOfCorrectReactedNaveToHideNotifications = NumberOfCorrectReactedHaveToHideNotifications;
         }
 
         public void SaveExperimentData()

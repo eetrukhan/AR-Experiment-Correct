@@ -86,6 +86,9 @@ namespace Logic
                         runningNums.Add(i);
                         Generator();                        
                     }
+                    // Added pause formula
+                    //pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
+                    //
                     yield return new WaitForSeconds(pause);
                 }
                 SaveTrialData();
@@ -125,8 +128,16 @@ namespace Logic
             FindObjectOfType<TrialDataStorage>().NextTrialExperiment(ExperimentData.subjectNumber, GlobalCommon.currentTypeName, ExperimentData.trialsNumber,
                     ExperimentData.timeInSeconds, ExperimentData.notificationsNumber,
                     ExperimentData.numberOfHaveToActNotifications, ExperimentData.numberOfNonIgnoredHaveToActNotifications,
-                    ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications, ExperimentData.numberOfInCorrectlyActedNotifications);
+                    ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications, ExperimentData.numberOfInCorrectlyActedNotifications, ExperimentData.sumOfAllReactionTime,ExperimentData.numberOfCorrectReactedNaveToHideNotifications);
             FindObjectOfType<TrialDataStorage>().SaveExperimentData();
+        }
+
+        private float CountingPause(int notificationTime, int sessionTime, int notificationsNum)
+        {
+            float countedPause = 0;
+            System.Random random = new System.Random();
+            countedPause = random.Next((int)Math.Ceiling(notificationTime / 2f), (int)Math.Ceiling(sessionTime / (float)notificationsNum));
+            return countedPause;
         }
     }
 }

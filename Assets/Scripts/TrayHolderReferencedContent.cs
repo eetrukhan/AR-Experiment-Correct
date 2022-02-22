@@ -35,7 +35,7 @@ public class TrayHolderReferencedContent : MonoBehaviour
             return;
         }
 
-        if (SimulateInertia)
+      /*  if (SimulateInertia)
         {
             float posSpeed = Time.deltaTime * LerpSpeed;
             transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
@@ -44,5 +44,6 @@ public class TrayHolderReferencedContent : MonoBehaviour
         {
             transform.position = posTo;
         }
+        */
     }
 }

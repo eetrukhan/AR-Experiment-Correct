@@ -23,7 +23,7 @@ namespace Logic
                 sourceName = groupColor.Equals(Color.gray) ? GlobalCommon.silentGroupKey :
                     notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
             }
-            processExperimentData(id, sourceName);
+            processExperimentData(id, sourceName,tag);
             processHideAndMarkAsRead(id, sourceName, tag);
         }
 
@@ -41,7 +41,7 @@ namespace Logic
             }
             string sourceName = groupColor.Equals(Color.gray) ? GlobalCommon.silentGroupKey :
                 notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
-            processExperimentData(id, sourceName);
+            processExperimentData(id, sourceName,tag);
             processHideAndMarkAsRead(id, sourceName, tag);
         }
 
@@ -51,19 +51,26 @@ namespace Logic
             string sourceName = groupColor.Equals(Color.gray) ? GlobalCommon.silentGroupKey :
                 notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
             string id = notification.transform.Find("Id").GetComponent<TextMeshPro>().text;
-            processExperimentData(id, sourceName);
+            processExperimentData(id, sourceName,tag);
             processHideAndMarkAsReadAll(sourceName, tag);
         }
 
-        internal void processExperimentData(string id, string sourceName)
+        internal void processExperimentData(string id, string sourceName, string tag)
         {
             var storage = FindObjectOfType<Storage>();
             Notification notification = storage.getFromStorage(id, sourceName);
             long reactionDuration = DateTime.Now.Ticks - notification.Timestamp;
-            if (notification.isCorrect)
+            if (notification.isCorrect && tag == "MarkAsRead" )
             {
                 ExperimentData.numberOfNonIgnoredHaveToActNotifications += 1;
                 ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications += reactionDuration;
+                ExperimentData.sumOfAllReactionTime += reactionDuration;
+            }
+            else if (tag == "Hide")
+            {
+                ExperimentData.numberOfCorrectReactedNaveToHideNotifications += 1;
+                ExperimentData.sumOfAllReactionTime += reactionDuration;
+
             }
             else
             {

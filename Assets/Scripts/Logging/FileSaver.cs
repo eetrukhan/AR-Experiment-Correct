@@ -21,6 +21,7 @@ namespace Logic
 
         public static void saveToFile(string logRow)
         {
+            logRow += "\n";
             try
             {
                 StreamWriter writer = new StreamWriter(Application.persistentDataPath + FILE_NAME, true, System.Text.Encoding.UTF8);

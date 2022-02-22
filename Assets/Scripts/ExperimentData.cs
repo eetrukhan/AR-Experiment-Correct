@@ -15,6 +15,16 @@ namespace Logic
         internal static int numberOfNonIgnoredHaveToActNotifications;
         internal static float sumOfReactionTimeToNonIgnoredHaveToActNotifications;
 
+        /// <summary>
+        /// NEW for time spent on making decision
+        /// </summary>
+        internal static float sumOfAllReactionTime;
+
+        /// <summary>
+        /// NEW number of non-needed notifications on which user reacted correstly
+        /// </summary>
+        internal static int numberOfCorrectReactedNaveToHideNotifications;
+        
         internal static int numberOfInCorrectlyActedNotifications;
     }
 }

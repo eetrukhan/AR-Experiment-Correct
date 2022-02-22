@@ -4,7 +4,7 @@ namespace Logic
 {
     public enum NotificationColor
     {
-        [Description("Blue")]
+        [Description("Box")]
         Telegram
        /* [Description("Green")]
         WhatsApp,
