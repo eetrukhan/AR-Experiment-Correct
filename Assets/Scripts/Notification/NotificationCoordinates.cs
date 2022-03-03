@@ -7,12 +7,19 @@ namespace Logic
     {
         public static List<Coordinates> formInFrontOfMobileCoordinatesArray()
         {
-            float dist = 0f;
+            /* float dist = 0f;
             List<Coordinates> coordinates = new List<Coordinates>();
             coordinates.Add(new Coordinates(new Vector3(0f, 2.5f, dist), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(0f, 1.4f, dist), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(0f, 0.3f, dist), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
-            return coordinates;
+            return coordinates; */
+           float dist = 0f;
+           List<Coordinates> coordinates = new List<Coordinates>();
+           coordinates.Add(new Coordinates(new Vector3(0f, 1.8f, dist), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+           coordinates.Add(new Coordinates(new Vector3(0f, 0.8f, dist), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+           coordinates.Add(new Coordinates(new Vector3(0f, -0.2f, dist), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+           return coordinates;
+           
         }
 
         public static List<Coordinates> formInFrontOfStickerCoordinatesArray()

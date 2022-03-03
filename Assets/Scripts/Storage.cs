@@ -48,7 +48,7 @@ namespace Logic
                     if (tag.Contains("MarkAsRead"))
                     {
                         notification.isMarkedAsRead = true;
-                        newNotificationsStorage.Push(notification);
+                       // newNotificationsStorage.Push(notification);
                     }
                 }
             }

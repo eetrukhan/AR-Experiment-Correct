@@ -7,14 +7,15 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
     public GameObject Camera;
 
     [Tooltip("The distance from the camera that this object should be placed")]
-    private float DistanceFromCamera = 10f;
+    private float DistanceFromCamera = 10f; //10f
 
     [Tooltip("Angle to the horizon")]
-    public float AngleToTheHorizon = 8f;
+    public float AngleToTheHorizon = 8f;   // ок на -11 было + чуть сдвинут сам холдер
 
     [Tooltip("Angle when tray should be shown")]
     public float TrayShowAngle = 35f;
 
+    private Vector3 minusPos = new Vector3(0,-3,0);
     void OnEnable()
     {
         if (Camera == null)
@@ -30,7 +31,7 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
         Vector3 posTo = Camera.transform.position + Camera.transform.forward * DistanceFromCamera;
         Quaternion rotTo = Quaternion.LookRotation(transform.position - Camera.transform.position);
         transform.rotation = rotTo;
-        transform.position = posTo;
+        transform.position = posTo+minusPos;//
     }
 
     void Update()
@@ -50,26 +51,30 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
                 posTo.y = DistanceFromCamera * Mathf.Tan(Mathf.Deg2Rad * AngleToTheHorizon);
             }
             transform.rotation = rotTo;
-            transform.position = posTo;
+            transform.position = posTo + minusPos ; // 
         }
         else
         {
             Vector3 posTo = transform.position;
             Quaternion oldRotTo = transform.rotation;
-            if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
+            Debug.Log("Camera.transform.rotation.eulerAngles.x: "+Camera.transform.rotation.eulerAngles.x+"; AngleToTheHorizon" + AngleToTheHorizon);
+            //if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
+            if ((Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
+                ||(Camera.transform.rotation.eulerAngles.x <= 180 && Camera.transform.rotation.eulerAngles.x < Mathf.Abs(AngleToTheHorizon)))
             {
                 posTo.y = DistanceFromCamera * Mathf.Tan(Mathf.Deg2Rad * AngleToTheHorizon);
-                transform.position = posTo;
+                transform.position = posTo + minusPos; //
                 transform.rotation = oldRotTo;
             }
             else
             {
                 Vector3 posRealTo = Camera.transform.position + Camera.transform.forward * DistanceFromCamera;                
                 posTo.y = posRealTo.y;
-                transform.position = posTo;
+                transform.position = posTo + minusPos;//
                 oldRotTo.x = rotTo.x;
                 transform.rotation = oldRotTo;
             }
         }
+        
     }
 }

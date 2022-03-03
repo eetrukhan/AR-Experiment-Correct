@@ -22,6 +22,7 @@ TagManager:
   - LoadButton
   - SaveButton
   - RealSenseDevice
+  - Anchor
   layers:
   - Default
   - TransparentFX

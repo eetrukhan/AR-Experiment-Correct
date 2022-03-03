@@ -265,6 +265,8 @@
             </e>
           </e>
         </e>
+        <e p="HolderPlacer.cs" t="Include" />
+        <e p="KeysMovement.cs" t="Include" />
         <e p="NSObstacle" t="Include">
           <e p="Materials" t="Include">
             <e p="OpaqueAlwaysOnTop.shader" t="Include" />

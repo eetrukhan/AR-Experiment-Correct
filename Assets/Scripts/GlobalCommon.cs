@@ -7,7 +7,7 @@ namespace Logic
         public static int notificationsInColumnTray = 5;
         public static int notificationColumnsTray = 8;
         public static string silentGroupKey = "_silent_";
-        public static float waitForActionToBeAcceptedPeriod = 2f;
+        public static float waitForActionToBeAcceptedPeriod = 1f; //2f
         public static float pauseBetweenTrials = 5f;
 
         internal static string currentTypeName;

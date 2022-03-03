@@ -17,15 +17,20 @@ namespace Logic
             public String Row;
         }
 
-        private static string FILE_NAME = "/logData.json";
+        //private static string FILE_NAME = "/logData.json";
+        private static string FILE_NAME = "/logData.csv";
 
         public static void saveToFile(string logRow)
         {
             logRow += "\n";
             try
             {
+                
                 StreamWriter writer = new StreamWriter(Application.persistentDataPath + FILE_NAME, true, System.Text.Encoding.UTF8);
-                writer.Write(JsonUtility.ToJson(new SerializableWrapper(logRow)));
+                //logRow = logRow.Replace(";", ",");
+                writer.WriteLine(logRow);
+                //writer.Write(JsonUtility.ToJson(new SerializableWrapper(logRow)));
+                writer.Flush();
                 writer.Close();
             }
             catch (Exception e)
