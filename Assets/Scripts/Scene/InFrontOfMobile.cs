@@ -60,7 +60,8 @@ namespace Logic
             try
             {
                 Vector3 trayPosBefore = trayHolder.transform.position;
-                trayPosBefore.y = 10;
+                //trayPosBefore.y = 10;
+                trayPosBefore.y = 5;
                 trayHolder.transform.position = trayPosBefore;
             }
             catch(Exception e)

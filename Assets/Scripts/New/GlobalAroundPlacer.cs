@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Logic;
 using UnityEngine;
 
 public class GlobalAroundPlacer : MonoBehaviour
@@ -28,7 +29,7 @@ public class GlobalAroundPlacer : MonoBehaviour
             }
         }
 */
-        float speed = 0.1f;
+        float speed = 1f;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.position += new Vector3(0,speed,0)*Time.deltaTime;
@@ -55,5 +56,7 @@ public class GlobalAroundPlacer : MonoBehaviour
         {
             transform.position += new Vector3(speed,0,0)*Time.deltaTime; 
         }
+
+        GlobalAround.position = transform.position;
     }
 }

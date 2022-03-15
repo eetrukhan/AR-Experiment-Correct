@@ -118,12 +118,12 @@ namespace Logic
                 for (int i = 0; i < groupNotifications.Count; i++)
                 {
                     Notification notificationInGroup = groupNotifications.ToArray()[i];
-                    if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
+                    //if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
                     {
                         bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || trayCoordinatesIndex == columnIndex * GlobalCommon.notificationsInColumnTray - 1;
-                        Vector3 position = trayCoordinates[trayCoordinatesIndex].Position;
-                        Quaternion rotation = Quaternion.Euler(trayCoordinates[trayCoordinatesIndex].Rotation.x, trayCoordinates[trayCoordinatesIndex].Rotation.y, trayCoordinates[trayCoordinatesIndex].Rotation.z);
-                        Vector3 scale = trayCoordinates[trayCoordinatesIndex].Scale;
+                        Vector3 position = coordinates[usualCoordinatesIndex].Position;//trayCoordinates[trayCoordinatesIndex].Position;
+                        Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x, coordinates[usualCoordinatesIndex].Rotation.y, coordinates[usualCoordinatesIndex].Rotation.z); //Quaternion.Euler(trayCoordinates[trayCoordinatesIndex].Rotation.x, trayCoordinates[trayCoordinatesIndex].Rotation.y, trayCoordinates[trayCoordinatesIndex].Rotation.z);
+                        Vector3 scale = coordinates[usualCoordinatesIndex].Scale; //trayCoordinates[trayCoordinatesIndex].Scale;
                         GameObject trayN = notificationGenerator(trayNotification,
                                               notificationInGroup,
                                               position,
@@ -134,8 +134,9 @@ namespace Logic
                         {
                             //trayN.transform.parent = trayHolder.transform;
                             trayN.transform.SetParent(trayHolder.transform);
-                            trayN.transform.localPosition = position;
-                            trayN.transform.localRotation = rotation;
+                            //trayN.transform.localPosition = position;
+                            //trayN.transform.localRotation = rotation;
+                            usualCoordinatesIndex += 1;
                         }
                         catch (Exception e) {  }
                         trayCoordinatesIndex += 1;
@@ -146,7 +147,7 @@ namespace Logic
                             columnIndex += 1;
                         }
                     }
-                    if (i < notificationsInColumn
+                   /* if (i < notificationsInColumn
                         && trayHolder != null
                         && !trayHolder.activeSelf
                         && notificationInGroup != null
@@ -163,13 +164,14 @@ namespace Logic
                                               scale,
                                               rotation,
                                               doesHaveGroupIcon);
-                        GameObject trayN = Instantiate(n);
+                        // GameObject trayN = Instantiate(n); // suppose it's strange object without parent
                         //n.transform.parent = notificationsHolder.transform;
                         n.transform.SetParent(notificationsHolder.transform);
-                        n.transform.localPosition = position;
-                        n.transform.localRotation = rotation;
+                        //n.transform.localPosition = position;
+                        //n.transform.localRotation = rotation;
                         usualCoordinatesIndex += 1;
                     }
+                    */
                 }
                 groupIndex += 1;
             }

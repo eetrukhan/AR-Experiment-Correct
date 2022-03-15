@@ -27,7 +27,7 @@ public class TrayHolderReferencedContent : MonoBehaviour
 
     void Update()
     {
-       Debug.Log("Ang: " + Camera.transform.rotation.eulerAngles.x + " " + (Camera.transform.rotation.eulerAngles.x < 180) + " " + (Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle)) + " " + TrayHideAngle);
+//       Debug.Log("Ang: " + Camera.transform.rotation.eulerAngles.x + " " + (Camera.transform.rotation.eulerAngles.x < 180) + " " + (Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle)) + " " + TrayHideAngle);
         Vector3 posTo = Camera.transform.position;
         if (Camera.transform.rotation.eulerAngles.x < 180 && Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle))
         {

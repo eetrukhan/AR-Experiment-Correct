@@ -35,8 +35,10 @@ namespace Logic
         public static List<Coordinates> formAroundMobileCoordinatesArray()
         {
             GlobalAround globalAround = FindObjectOfType<GlobalAround>();
-            Vector3 center = globalAround.position;
-            Quaternion rotation = globalAround.rotation;
+            //Vector3 center = globalAround.position;
+            //Quaternion rotation = globalAround.rotation;
+            Vector3 center = GlobalAround.position;
+            Quaternion rotation = GlobalAround.rotation;
             List<Coordinates> coordinates = new List<Coordinates>();
             float xDist = 0.15f;
             float zDist = 0.05f;
@@ -65,8 +67,11 @@ namespace Logic
         public static List<Coordinates> formAroundStickerCoordinatesArray()
         {
             GlobalAround globalAround = FindObjectOfType<GlobalAround>();
-            Vector3 center = globalAround.position;
-            Quaternion rotation = globalAround.rotation;
+            //Vector3 center = globalAround.position;
+            //Quaternion rotation = globalAround.rotation;
+            
+            Vector3 center = GlobalAround.position;
+            Quaternion rotation = GlobalAround.rotation;
             List<Coordinates> coordinates = new List<Coordinates>();
             float xDist = 0.1f;
             float zDist = 0.09f;

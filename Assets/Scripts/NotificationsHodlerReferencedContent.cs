@@ -57,7 +57,7 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
         {
             Vector3 posTo = transform.position;
             Quaternion oldRotTo = transform.rotation;
-            Debug.Log("Camera.transform.rotation.eulerAngles.x: "+Camera.transform.rotation.eulerAngles.x+"; AngleToTheHorizon" + AngleToTheHorizon);
+            // Debug.Log("Camera.transform.rotation.eulerAngles.x: "+Camera.transform.rotation.eulerAngles.x+"; AngleToTheHorizon" + AngleToTheHorizon);
             //if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
             if ((Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
                 ||(Camera.transform.rotation.eulerAngles.x <= 180 && Camera.transform.rotation.eulerAngles.x < Mathf.Abs(AngleToTheHorizon)))

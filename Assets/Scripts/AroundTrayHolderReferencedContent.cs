@@ -24,7 +24,7 @@ public class AroundTrayHolderReferencedContent : MonoBehaviour
 
     void Update()
     {
-        Vector3 posTo = Camera.transform.position;       
+        /*Vector3 posTo = Camera.transform.position;       
 
         if (SimulateInertia)
         {
@@ -35,5 +35,6 @@ public class AroundTrayHolderReferencedContent : MonoBehaviour
         {
             transform.position = posTo;
         }
+        */
     }
 }
