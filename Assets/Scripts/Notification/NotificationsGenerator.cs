@@ -48,7 +48,7 @@ namespace Logic
             int sourceIndex = 0;
             //bool isSilent = random.Next(0, 2) == 0;
             bool isSilent = false;
-            if (generateHaveToAct)
+           // if (generateHaveToAct)
             {
                // sourceIndex = mapNameToIndex();
                 isSilent = false;
@@ -63,13 +63,32 @@ namespace Logic
             Color sourceColor = EnumDescription.getColor(EnumDescription.getDescription(notificationColor));
             Array values = Enum.GetValues(typeof(NotificationAuthor));
             int authorIndex = random.Next(values.Length);
-            if (generateHaveToAct)
+            //bool generateHaveToAct = authorIndex == correctAuthorIndex;
+          /*  if (generateHaveToAct)
             {
                 authorIndex = mapAuthorToIndex();
-            }
+            }*/
             Debug.Log(authorIndex);
-            NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(authorIndex);
-            string author = EnumDescription.getDescription(notificationAuthor);
+            string author;
+            NotificationAuthor notificationAuthor;
+            if(generateHaveToAct)
+            {
+                authorIndex = GeneratorRunner.correctAuthorIndex;
+                notificationAuthor =
+                (NotificationAuthor) values.GetValue(GeneratorRunner.correctAuthorIndex);
+                author = EnumDescription.getDescription(notificationAuthor);
+            }
+            else
+            {
+                int notificationAuthorIndex = random.Next(values.Length);
+                while(notificationAuthorIndex==GeneratorRunner.correctAuthorIndex)
+                    notificationAuthorIndex = random.Next(values.Length);
+                notificationAuthor =
+                    (NotificationAuthor) values.GetValue(notificationAuthorIndex);
+                author = EnumDescription.getDescription(notificationAuthor);
+                authorIndex = notificationAuthorIndex;
+
+            }
             values = Enum.GetValues(typeof(NotificationIcon));
             NotificationIcon notificationIcon = (NotificationIcon)values.GetValue(authorIndex);
             string icon = EnumDescription.getDescription(notificationIcon);

@@ -8,12 +8,18 @@ namespace Logic
 {
     public class GeneratorRunner : MonoBehaviour
     {
+        private System.Random random = new System.Random();
         private NotificationsGenerator notificationsGenerator = new NotificationsGenerator();
         private int notificationIndex = 0;
         private int alreadyCorrect = 0;
         public bool isRunning = false;
         private float pause = 0;
         private HashSet<int> runningNums = new HashSet<int>();
+        public static bool startPressed = false;
+        private string correctName;
+        public static int correctAuthorIndex;
+        
+        Array values;
 
         public void Stop()
         {
@@ -38,6 +44,14 @@ namespace Logic
             }
         }
 
+        void GenerateCorrectName()
+        {
+            values = Enum.GetValues(typeof(NotificationAuthor));
+            random.Next();
+            correctAuthorIndex = random.Next(values.Length);
+            Debug.Log((NotificationAuthor)correctAuthorIndex);
+        }
+
         private void ReturnToMainMenu()
         {
             try
@@ -56,11 +70,17 @@ namespace Logic
             }
         }
 
+        public void Awake()
+        {
+            GenerateCorrectName();
+        }
+
         public void Update()
         {
-            if (isRunning)
+            if (isRunning && startPressed)
             {
                 isRunning = false;
+                startPressed = false;
                 pause = ExperimentData.timeInSeconds / ExperimentData.notificationsNumber;
                 StartCoroutine(Runner());
             }
@@ -68,6 +88,10 @@ namespace Logic
 
         private IEnumerator Runner()
         {
+            // Added pause formula
+            pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
+
+            
             Debug.Log("Started" + DateTime.Now);
             for (int k = 0; k < ExperimentData.trialsNumber; k++)
             {
@@ -79,6 +103,7 @@ namespace Logic
                 EventManager.Broadcast(EVENT.TimerShow);
                 yield return new WaitForSeconds(GlobalCommon.pauseBetweenTrials);
                 EventManager.Broadcast(EVENT.TimerHide);
+                yield return new WaitForSeconds(pause);
                 for (int i = 0; i < ExperimentData.notificationsNumber; ++i)
                 {
                     if (!runningNums.Contains(i))
@@ -86,9 +111,9 @@ namespace Logic
                         runningNums.Add(i);
                         Generator();                        
                     }
-                    // Added pause formula
-                    //pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
-                    //
+                     //
+                     pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
+
                     yield return new WaitForSeconds(pause);
                 }
                 SaveTrialData();
@@ -101,15 +126,28 @@ namespace Logic
             Stop();
         }
 
+        private IEnumerator StartingPause()
+        {
+            pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
+            yield return new WaitForSeconds(pause);
+        }
+
         private void Generator()
         {
             int atWhichToGenerateHaveToActNotification = ExperimentData.notificationsNumber / ExperimentData.numberOfHaveToActNotifications;
             bool generateHaveToAct = notificationIndex % atWhichToGenerateHaveToActNotification == 0 && alreadyCorrect < ExperimentData.numberOfHaveToActNotifications;
-            if (generateHaveToAct)
+       
+            Notification notification = notificationsGenerator.getNotification(generateHaveToAct);
+           // NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(correctAuthor);
+           // string author = EnumDescription.getDescription(notificationAuthor);
+           if (generateHaveToAct)
             {
                 alreadyCorrect += 1;
             }
-            Notification notification = notificationsGenerator.getNotification(generateHaveToAct);
+            
+         // Notification notification = notificationsGenerator.getNotification(correctAuthorIndex);
+          
+          
             var storage = FindObjectOfType<Storage>();
             storage.addToStorage(notification);
             EventManager.Broadcast(EVENT.NotificationCreated);

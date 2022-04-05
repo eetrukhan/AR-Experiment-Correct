@@ -20,9 +20,14 @@ public class WavesHolderReferencedContent : MonoBehaviour
 
     void Update()
     {
-        if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) >= TrayShowAngle)
+        //if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) >= TrayShowAngle)
+       // if ((Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > TrayShowAngle)
+       //     ||(Camera.transform.rotation.eulerAngles.x <= 180 && Camera.transform.rotation.eulerAngles.x < Mathf.Abs(TrayShowAngle)))
+       if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) >= TrayShowAngle)
         {
+            Debug.Log("Showing");
             EventManager.Broadcast(EVENT.ShowTray);
+            Debug.Log(Camera.transform.rotation.eulerAngles.x);
             return;
         }
 

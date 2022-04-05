@@ -23,8 +23,10 @@ namespace Logic
                 sourceName = groupColor.Equals(Color.gray) ? GlobalCommon.silentGroupKey :
                     notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
             }
-            processExperimentData(id, sourceName,tag);
-            processHideAndMarkAsRead(id, sourceName, tag);
+            var storage = FindObjectOfType<Storage>();
+            Notification notificationObj = storage.getFromStorage(id, sourceName);
+            int a = processExperimentData(notificationObj, tag);
+            processHideAndMarkAsRead(id, sourceName, tag, a);
         }
 
         internal void actionProcessLocalAction(GameObject notification, string tag)
@@ -41,8 +43,10 @@ namespace Logic
             }
             string sourceName = groupColor.Equals(Color.gray) ? GlobalCommon.silentGroupKey :
                 notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
-            processExperimentData(id, sourceName,tag);
-            processHideAndMarkAsRead(id, sourceName, tag);
+            var storage = FindObjectOfType<Storage>();
+            Notification notificationObj = storage.getFromStorage(id, sourceName);
+            int a = processExperimentData(notificationObj, tag);
+            processHideAndMarkAsRead(id, sourceName, tag, a);
         }
 
         internal void actionProcessGroup(GameObject notification, string tag)
@@ -51,14 +55,17 @@ namespace Logic
             string sourceName = groupColor.Equals(Color.gray) ? GlobalCommon.silentGroupKey :
                 notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
             string id = notification.transform.Find("Id").GetComponent<TextMeshPro>().text;
-            processExperimentData(id, sourceName,tag);
+            var storage = FindObjectOfType<Storage>();
+            Notification notificationObj = storage.getFromStorage(id, sourceName);
+            int a = processExperimentData(notificationObj, tag);
             processHideAndMarkAsReadAll(sourceName, tag);
         }
 
-        internal void processExperimentData(string id, string sourceName, string tag)
+        internal int processExperimentData(Notification notification, string tag)
         {
-            var storage = FindObjectOfType<Storage>();
-            Notification notification = storage.getFromStorage(id, sourceName);
+            Debug.Log("fIRST");
+            //var storage = FindObjectOfType<Storage>();
+            //Notification notification = storage.getFromStorage(id, sourceName);
             long reactionDuration = DateTime.Now.Ticks - notification.Timestamp;
             if (notification.isCorrect && tag == "MarkAsRead" )
             {
@@ -78,10 +85,12 @@ namespace Logic
             }
             string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", reactionDuration.ToString());
             FileSaver.saveToFile(logInfo);
+            return 0;
         }
 
-        internal void processHideAndMarkAsRead(string id, string sourceName, string tag)
+        internal void processHideAndMarkAsRead(string id, string sourceName, string tag, int a)
         {
+            Debug.Log("seond");
             Debug.Log(string.Format("Notification with id {0} from source {1} was chosen to {2}", id, sourceName, tag));
             var storage = FindObjectOfType<Storage>();
             storage.removeFromStorage(id, sourceName, tag);

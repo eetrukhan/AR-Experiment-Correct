@@ -105,8 +105,15 @@ namespace Logic
             coordinates.Add(new Coordinates(new Vector3(0f, 0f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(0f, 1.1f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(0f, 2.2f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+        
+      /*   
+         coordinates.Add(new Coordinates(new Vector3(0f, 2.2f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+         coordinates.Add(new Coordinates(new Vector3(0f, 1.1f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+         coordinates.Add(new Coordinates(new Vector3(0f, 0f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+         coordinates.Add(new Coordinates(new Vector3(0f, -1.1f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+         coordinates.Add(new Coordinates(new Vector3(0f, -2.2f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
 
-            coordinates.Add(new Coordinates(new Vector3(-7f, -2.2f, 8), new Quaternion(0, 315, 0, 0), new Vector3(1f, 1f, 1f)));
+       /*     coordinates.Add(new Coordinates(new Vector3(-7f, -2.2f, 8), new Quaternion(0, 315, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(-7f, -1.1f, 8), new Quaternion(0, 315, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(-7f, 0f, 8), new Quaternion(0, 315, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(-7f, 1.1f, 8), new Quaternion(0, 315, 0, 0), new Vector3(1f, 1f, 1f)));
@@ -147,6 +154,7 @@ namespace Logic
             coordinates.Add(new Coordinates(new Vector3(0f, 0f, -10), new Quaternion(0, 180, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(0f, 1.1f, -10), new Quaternion(0, 180, 0, 0), new Vector3(1f, 1f, 1f)));
             coordinates.Add(new Coordinates(new Vector3(0f, 2.2f, -10), new Quaternion(0, 180, 0, 0), new Vector3(1f, 1f, 1f)));
+            */
             return coordinates;
         }
 

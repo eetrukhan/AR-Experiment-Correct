@@ -9,10 +9,13 @@ public class GlobalAroundPlacer : MonoBehaviour
     private RsDevice source;
     [SerializeField]
     private Transform originCube;
+
+    private MeshRenderer myMesh;
     // Start is called before the first frame update
     void Start()
     {
-       // source = (RsDevice)FindObjectOfType(typeof(RsDevice));
+        myMesh = GetComponent<MeshRenderer>();
+        // source = (RsDevice)FindObjectOfType(typeof(RsDevice));
     }
 
     // Update is called once per frame
@@ -29,6 +32,10 @@ public class GlobalAroundPlacer : MonoBehaviour
             }
         }
 */
+      if (Input.GetKeyDown(KeyCode.H))
+      {
+          myMesh.enabled = !myMesh.enabled;
+      }
         float speed = 1f;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -44,7 +51,7 @@ public class GlobalAroundPlacer : MonoBehaviour
         {
             transform.position += new Vector3(0,0,speed)*Time.deltaTime; 
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             transform.position += new Vector3(0,0,-speed)*Time.deltaTime; 
         }

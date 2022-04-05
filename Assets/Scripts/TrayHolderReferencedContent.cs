@@ -32,6 +32,8 @@ public class TrayHolderReferencedContent : MonoBehaviour
         if (Camera.transform.rotation.eulerAngles.x < 180 && Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle))
         {
             EventManager.Broadcast(EVENT.HideTray);
+            Debug.Log("Hiding");
+            Debug.Log(Camera.transform.rotation.eulerAngles.x);
             return;
         }
 

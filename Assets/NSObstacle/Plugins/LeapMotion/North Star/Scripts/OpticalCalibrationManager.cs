@@ -31,7 +31,7 @@ namespace Leap.Unity.AR {
 
     [Tooltip("Press this key to save a new calibration file specified by the file name "
            + "into the calibrations folder.")]
-    public KeyCode saveCalibrationKey = KeyCode.S;
+    public KeyCode saveCalibrationKey = KeyCode.K;
 
     [Tooltip("If this option is checked, the Ctrl key must be held down to save a calibration.")]
     public bool requireCtrlHeld = true;

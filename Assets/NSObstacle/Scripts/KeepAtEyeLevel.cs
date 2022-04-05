@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Leap;
 using UnityEngine;
 
 public class KeepAtEyeLevel : MonoBehaviour
@@ -28,9 +29,9 @@ public class KeepAtEyeLevel : MonoBehaviour
         }
 
         // Calculate an offset that will allow to lower the canvas down so that its top border is at the eye level
-        RectTransform t = (RectTransform) transform;
-        float canvasHeightInMeters = t.sizeDelta.y / 1000f;
-        _verticalOffset = - canvasHeightInMeters / 2f;
+        //        RectTransform t = (RectTransform) transform;
+        //float canvasHeightInMeters = t.sizeDelta.y / 1000f;
+        //_verticalOffset = - canvasHeightInMeters / 2f;
     }
 
     // Update is called once per frame
@@ -39,17 +40,19 @@ public class KeepAtEyeLevel : MonoBehaviour
         if (!enabled)
             return;
 
-        Vector3 posTo = transform.position;
-        posTo.y = Camera.position.y + _verticalOffset - LowerDown;
+        Vector3 previosPosTo = transform.position;
+        Vector3 newPosTo = previosPosTo;
+        newPosTo.y = Camera.position.y + _verticalOffset - LowerDown;
 
         if (SimulateInertia)
         {
             float posSpeed = Time.deltaTime * PositionLerpSpeed;
-            transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
+           // transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
+           transform.position = Vector3.Lerp(previosPosTo, newPosTo, posSpeed);
         }
         else
         {
-            transform.position = posTo;
+            transform.position = previosPosTo;
         }
     }
 }

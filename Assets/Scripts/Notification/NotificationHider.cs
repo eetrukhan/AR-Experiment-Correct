@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Logic;
 using TMPro;
 using UnityEngine;
@@ -7,18 +8,45 @@ public class NotificationHider : MonoBehaviour
 {
     public float hideTimeOfTheNotificationAfterArrival;
     public GameObject id;
+    private bool shouldBeDestroyed = false;
+    
 
+    void Awake()
+    {
+     /*   Notification n = FindObjectOfType<Storage>().getFromStorage(id.GetComponent<TextMeshPro>().text, "Telegram");
+        if (shouldBeDestroyed)
+        {
+            long timestamp = DateTime.Now.Ticks;
+            long timeDestroyed = n.Timestamp + (new DateTime(0, 0, 0, 0, 0, 10).Ticks);
+            Debug.Log(timestamp + " / "+ timeDestroyed);
+            if (timeDestroyed <= timestamp)
+                StartCoroutine(Destroyer(0));
+            else
+                StartCoroutine(Destroyer(timeDestroyed - timestamp));
+        }
+        */
+    }
     void Start()
     {
         if (transform.parent != null && transform.parent.name != "TrayHolder")
         {
-            StartCoroutine(Destroyer());
+            Notification n = FindObjectOfType<Storage>().getFromStorage(id.GetComponent<TextMeshPro>().text, "Telegram");
+            long timestamp = DateTime.Now.Ticks;
+            long timeDestroyed = n.Timestamp + 10*TimeSpan.TicksPerSecond;
+            Debug.Log(timestamp + " / "+ timeDestroyed);
+            if (timeDestroyed <= timestamp)
+                StartCoroutine(Destroyer(0));
+            else
+                StartCoroutine(Destroyer(timeDestroyed - timestamp));
+           // if(!shouldBeDestroyed)
+             //   StartCoroutine(Destroyer(hideTimeOfTheNotificationAfterArrival));
         }
     }
 
-    IEnumerator Destroyer()
+    IEnumerator Destroyer(long time)
     {
-        yield return new WaitForSeconds(hideTimeOfTheNotificationAfterArrival);
+        shouldBeDestroyed = true;
+        yield return new WaitForSeconds((float)(new TimeSpan((time)).TotalSeconds));
         Debug.Log("Destroy");
         string sourceName = transform.Find("Source").GetComponent<TextMeshPro>().text;
         string tag = "MarkAsRead";

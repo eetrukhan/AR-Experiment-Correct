@@ -23,6 +23,9 @@ namespace Logic
         public Material green;
         public Material grey;
 
+        [SerializeField] private TMP_Text nameText;
+        private System.Random random = new System.Random(); 
+        // public int correctAuthor;
         public delegate GameObject Generator(GameObject prefabToCreate, Notification notification,
                                           Vector3 position, Vector3 scale, Quaternion rotation,
                                           bool doesHaveGroupIcon);
@@ -45,6 +48,17 @@ namespace Logic
                 trayHolder = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[4];
             }
             FindObjectOfType<GeneratorRunner>().isRunning = true;
+            
+            // отображение автора
+            DisplayName();
+        }
+
+        private void DisplayName()
+        {
+            Array values = Enum.GetValues(typeof(NotificationAuthor));
+            NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(GeneratorRunner.correctAuthorIndex);
+            string author = EnumDescription.getDescription(notificationAuthor);
+            nameText.text = author;
         }
 
         private void hideTimer()
@@ -78,7 +92,7 @@ namespace Logic
             try
             {
                 Vector3 trayPosBefore = trayHolder.transform.position;
-                trayPosBefore.y = 10;
+                trayPosBefore.y = 0;
                 trayHolder.transform.position = trayPosBefore;
             }
             catch (Exception e)
@@ -130,13 +144,14 @@ namespace Logic
                     GameObject wave = Instantiate(notification) as GameObject;
                     Color c = n.Color;
                     c.a = 0.5f;
-                
+                /*
                     if (n.SourceName == "YouTube") wave.GetComponentInChildren<Image>().material = red;
                     if (n.SourceName == "Telegram") wave.GetComponentInChildren<Image>().material = blue;
                     if (n.SourceName == "Яндекс.Почта") wave.GetComponentInChildren<Image>().material = yellow;
                     if (n.SourceName == "WhatsApp") wave.GetComponentInChildren<Image>().material = green;
                     if (n.SourceName == GlobalCommon.silentGroupKey) wave.GetComponentInChildren<Image>().material = grey;
                     wave.GetComponentInChildren<Image>().material.SetFloat("_Glossiness", 1f);
+                    */
                     try
                     {
                         wave.transform.SetParent(notificationsHolder.GetComponent<Transform>());
@@ -148,7 +163,8 @@ namespace Logic
                 }
                 Debug.Log("TRAYHOLD2 " + trayHolder);
                 if (trayHolder != null && trayHolder.activeSelf)
-                {
+                { 
+                    /*
                     clearScene();
                     List<Coordinates> coordinates = traysCoordinates();
                     int indexPosition = 0;
@@ -181,7 +197,53 @@ namespace Logic
                                     notififcationsNumberInTraysColumnNow = 0;
                                     columnIndex += 1;
                                 }
+                                
                             }
+
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    */
+                    
+                     clearScene();
+                    List<Coordinates> coordinates = traysCoordinates();
+                    int indexPosition = 0;
+                    int maxNotificationsInTray = GlobalCommon.notificationsInColumnTray * GlobalCommon.notificationColumnsTray;
+                    foreach (KeyValuePair<string, NotificationsStorage> notificationGroup in orderedNotifications)
+                    {
+                        Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
+                        //for (int i = groupNotifications.Count-1; i >=0; i--)
+                        for (int i = 0; i < groupNotifications.Count; i++)
+                        {
+                            Notification notification = groupNotifications.ToArray()[i];
+                            bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || indexPosition == columnIndex * GlobalCommon.notificationsInColumnTray - 1;
+                            if (indexPosition < maxNotificationsInTray)
+                            {
+                                Vector3 position = coordinates[indexPosition].Position;
+                                Quaternion rotation = Quaternion.Euler(coordinates[indexPosition].Rotation.x, coordinates[indexPosition].Rotation.y, coordinates[indexPosition].Rotation.z);
+                                Vector3 scale = coordinates[indexPosition].Scale;
+                                GameObject trayN = notificationGenerator(trayNotification, notification, position, scale, rotation, doesHaveGroupIconTray);
+                                try
+                                {
+                                    //trayN.transform.parent = trayHolder.transform;
+                                    trayN.transform.SetParent(trayHolder.transform);
+                                    trayN.transform.localPosition = position;
+                                    trayN.transform.localRotation = rotation;
+                                }
+                                catch (Exception e) { }
+                                indexPosition += 1;
+                                notififcationsNumberInTraysColumnNow += 1;
+                                if (notififcationsNumberInTraysColumnNow == GlobalCommon.notificationsInColumnTray)
+                                {
+                                    notififcationsNumberInTraysColumnNow = 0;
+                                    columnIndex += 1;
+                                }
+                                
+                            }
+
                             else
                             {
                                 break;
@@ -192,8 +254,10 @@ namespace Logic
             }
             catch (Exception e)
             {
-                Debug.LogError(e);
+                Debug.LogError(e.Message);
+                clearScene();
             }
+            
         }
 
         private GameObject addMobileNotification(GameObject prefabToCreate, Notification notification,

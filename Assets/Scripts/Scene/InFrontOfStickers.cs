@@ -23,6 +23,8 @@ namespace Logic
         public Material green;
         public Material grey;
 
+        
+        [SerializeField] private TMP_Text nameText;
         public delegate GameObject Generator(GameObject prefabToCreate, Notification notification, Vector3 scale, bool doesHaveGroupIcon);
 
         public delegate List<Coordinates> Coordinate();
@@ -35,8 +37,17 @@ namespace Logic
             EventManager.AddHandler(EVENT.TimerShow, showTimer);
             EventManager.AddHandler(EVENT.TimerHide, hideTimer);
             FindObjectOfType<GeneratorRunner>().isRunning = true;
+            
+            DisplayName();
         }
 
+        private void DisplayName()
+        {
+            Array values = Enum.GetValues(typeof(NotificationAuthor));
+            NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(GeneratorRunner.correctAuthorIndex);
+            string author = EnumDescription.getDescription(notificationAuthor);
+            nameText.text = author;
+        }
         private void hideTimer()
         {
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[5].SetActive(false);
