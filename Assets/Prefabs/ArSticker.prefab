@@ -577,7 +577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5142810173988382948}
   - component: {fileID: 8005286762010919184}
-  m_Layer: 4
+  m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1349,8 +1349,8 @@ GameObject:
   - component: {fileID: 2300747943486240417}
   - component: {fileID: 1308582806559480437}
   - component: {fileID: 8816977159943946564}
-  m_Layer: 0
-  m_Name: ARSticker
+  m_Layer: 5
+  m_Name: ArSticker
   m_TagString: Notification
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4152187826527866884}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26d3b886519be46ebb352b8b9e5485b4, type: 3}
   m_Name: 
@@ -1544,7 +1544,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4152187826527866884}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -1796,7 +1796,7 @@ GameObject:
   - component: {fileID: 7939859540483579224}
   - component: {fileID: 4375570844094564628}
   - component: {fileID: 1544509501699064605}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IconBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

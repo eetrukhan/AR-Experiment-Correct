@@ -86,8 +86,8 @@ public class MenuController : MonoBehaviour
 
     public void StartAroundStickers()
     {
-        GlobalCommon.currentTypeName = "AroundStickers";
-        SceneManager.LoadSceneAsync("AroundStickers");
+        GlobalCommon.currentTypeName = "NewAroundStickers";
+        SceneManager.LoadSceneAsync("NewAroundStickers");
     }
 
     public void StartHiddenWaves()

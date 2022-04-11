@@ -23,6 +23,8 @@ namespace Logic
         public Material green;
         public Material grey;
 
+        [SerializeField] private TMP_Text nameText;
+
         public delegate GameObject Generator(GameObject prefabToCreate, Notification notification,
                                           Vector3 position, Vector3 scale, Quaternion rotation,
                                           bool doesHaveGroupIcon);
@@ -36,16 +38,28 @@ namespace Logic
             EventManager.AddHandler(EVENT.HideTray, hideTray);
             EventManager.AddHandler(EVENT.TimerShow, showTimer);
             EventManager.AddHandler(EVENT.TimerHide, hideTimer);
+            
+            DisplayName();
         }
 
+        private void DisplayName()
+        {
+            Array values = Enum.GetValues(typeof(NotificationAuthor));
+            NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(GeneratorRunner.correctAuthorIndex);
+            string author = EnumDescription.getDescription(notificationAuthor);
+            nameText.text = author;
+        }
+        
         private void hideTimer()
         {
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(false);
+            //UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(false);
+            timer.SetActive(false);
         }
 
         private void showTimer()
         {
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(true);
+            //UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(true);
+            timer.SetActive(true);
         }
 
         private void showTray()
@@ -116,12 +130,12 @@ namespace Logic
                 for (int i = 0; i < groupNotifications.Count; i++)
                 {
                     Notification notificationInGroup = groupNotifications.ToArray()[i];
-                    if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
+                    //if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
                     {
                         bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || trayCoordinatesIndex == columnIndex * GlobalCommon.notificationsInColumnTray - 1;
-                        Vector3 position = trayCoordinates[trayCoordinatesIndex].Position;
-                        Quaternion rotation = Quaternion.Euler(trayCoordinates[trayCoordinatesIndex].Rotation.x, trayCoordinates[trayCoordinatesIndex].Rotation.y, trayCoordinates[trayCoordinatesIndex].Rotation.z);
-                        Vector3 scale = trayCoordinates[trayCoordinatesIndex].Scale;
+                        Vector3 position = coordinates[usualCoordinatesIndex].Position; //trayCoordinates[trayCoordinatesIndex].Position;
+                        Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x, coordinates[usualCoordinatesIndex].Rotation.y, coordinates[usualCoordinatesIndex].Rotation.z); // Quaternion.Euler(trayCoordinates[trayCoordinatesIndex].Rotation.x, trayCoordinates[trayCoordinatesIndex].Rotation.y, trayCoordinates[trayCoordinatesIndex].Rotation.z);
+                        Vector3 scale = coordinates[usualCoordinatesIndex].Scale; //trayCoordinates[trayCoordinatesIndex].Scale;
                         GameObject trayN = notificationGenerator(trayNotification,
                                               notificationInGroup,
                                               position,
@@ -130,9 +144,12 @@ namespace Logic
                                               doesHaveGroupIconTray);
                         try
                         { 
-                            trayN.transform.parent = trayHolder.transform;
-                            trayN.transform.localPosition = position;
-                            trayN.transform.localRotation = rotation;
+                            //trayN.transform.parent = trayHolder.transform;
+                            //trayN.transform.localPosition = position;
+                            //trayN.transform.localRotation = rotation;
+                            
+                            trayN.transform.SetParent(trayHolder.transform);
+                            usualCoordinatesIndex += 1;
                         }
                         catch (Exception e) {  }
                         trayCoordinatesIndex += 1;
@@ -143,7 +160,7 @@ namespace Logic
                             columnIndex += 1;
                         }
                     }
-                    if (i < notificationsInColumn
+                  /*  if (i < notificationsInColumn
                         && trayHolder != null
                         && !trayHolder.activeSelf
                         && notificationInGroup != null
@@ -166,6 +183,7 @@ namespace Logic
                         n.transform.localRotation = rotation;
                         usualCoordinatesIndex += 1;
                     }
+                    */
                 }
                 groupIndex += 1;
             }

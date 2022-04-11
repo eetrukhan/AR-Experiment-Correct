@@ -23,6 +23,7 @@ namespace Logic
         public Material green;
         public Material grey;
         
+        [SerializeField] private TMP_Text nameText;
 
         public delegate GameObject Generator(GameObject prefabToCreate, Notification notification,
                                           Vector3 position, Vector3 scale, Quaternion rotation,
@@ -37,6 +38,16 @@ namespace Logic
             EventManager.AddHandler(EVENT.HideTray, hideTray);
             EventManager.AddHandler(EVENT.TimerShow, showTimer);
             EventManager.AddHandler(EVENT.TimerHide, hideTimer);
+            
+            DisplayName();
+        }
+        
+        private void DisplayName()
+        {
+            Array values = Enum.GetValues(typeof(NotificationAuthor));
+            NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(GeneratorRunner.correctAuthorIndex);
+            string author = EnumDescription.getDescription(notificationAuthor);
+            nameText.text = author;
         }
 
         private void hideTimer()

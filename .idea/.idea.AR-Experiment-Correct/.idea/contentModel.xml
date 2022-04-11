@@ -1482,6 +1482,7 @@
             </e>
           </e>
         </e>
+        <e p="ReticleHider.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="ActionButtonsTrigger.cs" t="Include" />
           <e p="ActionsProcessor.cs" t="Include" />
@@ -1527,6 +1528,8 @@
             <e p="NotificationText.cs" t="Include" />
           </e>
           <e p="NotificationsHodlerReferencedContent.cs" t="Include" />
+          <e p="OldNotificationsHolder.cs" t="Include" />
+          <e p="OldTrayHolder.cs" t="Include" />
           <e p="Scene" t="Include">
             <e p="AroundMobile.cs" t="Include" />
             <e p="AroundStickers.cs" t="Include" />

@@ -37,29 +37,29 @@ public class GlobalAroundPlacer : MonoBehaviour
           myMesh.enabled = !myMesh.enabled;
       }
         float speed = 1f;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             transform.position += new Vector3(0,speed,0)*Time.deltaTime;
             Debug.Log("Up");
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             transform.position += new Vector3(0,-speed,0)*Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.position += new Vector3(0,0,speed)*Time.deltaTime; 
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.position += new Vector3(0,0,-speed)*Time.deltaTime; 
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.position += new Vector3(-speed,0,0)*Time.deltaTime; 
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             transform.position += new Vector3(speed,0,0)*Time.deltaTime; 
         }

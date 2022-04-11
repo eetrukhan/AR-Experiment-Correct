@@ -18,6 +18,10 @@ namespace Logic
         public static bool startPressed = false;
         private string correctName;
         public static int correctAuthorIndex;
+        private ArrayList boolsArrayList;
+        private int numberOfNotification;
+
+        [SerializeField] private GameObject aroundObject;
         
         Array values;
 
@@ -68,24 +72,33 @@ namespace Logic
                 Debug.LogError(e);
                 SceneManager.LoadScene("MainMenu");
             }
+            aroundObject.SetActive(true);
         }
 
         public void Awake()
         {
             GenerateCorrectName();
+            
         }
+
+       
 
         public void Update()
         {
             if (isRunning && startPressed)
             {
+                aroundObject.SetActive(false);
                 isRunning = false;
                 startPressed = false;
                 pause = ExperimentData.timeInSeconds / ExperimentData.notificationsNumber;
+                
+                boolsArrayList = GenerateBoolArray();
+                numberOfNotification = 0;
+                
                 StartCoroutine(Runner());
             }
         }
-
+        
         private IEnumerator Runner()
         {
             // Added pause formula
@@ -135,9 +148,10 @@ namespace Logic
         private void Generator()
         {
             int atWhichToGenerateHaveToActNotification = ExperimentData.notificationsNumber / ExperimentData.numberOfHaveToActNotifications;
-            bool generateHaveToAct = notificationIndex % atWhichToGenerateHaveToActNotification == 0 && alreadyCorrect < ExperimentData.numberOfHaveToActNotifications;
-       
+            //bool generateHaveToAct = notificationIndex % atWhichToGenerateHaveToActNotification == 0 && alreadyCorrect < ExperimentData.numberOfHaveToActNotifications;
+            bool generateHaveToAct = (bool) boolsArrayList[numberOfNotification];
             Notification notification = notificationsGenerator.getNotification(generateHaveToAct);
+            numberOfNotification++;
            // NotificationAuthor notificationAuthor = (NotificationAuthor)values.GetValue(correctAuthor);
            // string author = EnumDescription.getDescription(notificationAuthor);
            if (generateHaveToAct)
@@ -153,6 +167,37 @@ namespace Logic
             EventManager.Broadcast(EVENT.NotificationCreated);
             SaveLogData(notification);
             notificationIndex += 1;
+        }
+
+        
+        private ArrayList GenerateBoolArray()
+        {
+            Debug.Log("BoolArray");
+            Debug.Log(ExperimentData.notificationsNumber);
+            Debug.Log(ExperimentData.numberOfHaveToActNotifications);
+            ArrayList array = new ArrayList();
+            for (int i = 0; i < ExperimentData.notificationsNumber; i++)
+            {
+                array.Add(false);
+            }
+            
+            Stack<int> numbers = new Stack<int>();
+            for (int i = 0; i < ExperimentData.numberOfHaveToActNotifications; i++)
+            {
+                int rnd = random.Next(0, ExperimentData.notificationsNumber);
+                while ((bool)array[rnd])
+                {
+                    rnd = random.Next(0, ExperimentData.notificationsNumber);
+                }
+                Debug.Log(rnd.ToString());
+                array[rnd] = true;
+            }
+            for (int i = 0; i < array.Count; i++)
+            {
+                Debug.Log(array[i]);
+            }
+
+            return array;
         }
 
         private void SaveLogData(Notification notification)

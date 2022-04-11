@@ -543,6 +543,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1032344287}
+--- !u!114 &242402462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242402460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f745b8d89214dc3b2d3f4d2c81a9a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notification: {fileID: 4152187826527866884, guid: e4dff0a2bd5bf465692987eeffafed59,
+    type: 3}
+  trayNotification: {fileID: 4152187826527866884, guid: e4dff0a2bd5bf465692987eeffafed59,
+    type: 3}
+  notificationsHolder: {fileID: 475933800}
+  trayHolder: {fileID: 467690068}
+  timer: {fileID: 1520167310}
+  red: {fileID: 2100000, guid: 938f5f3fdd19a4be3b09ab9bd63ed1ce, type: 2}
+  blue: {fileID: 2100000, guid: fb2252c0d24a84135aa4942dcc379161, type: 2}
+  yellow: {fileID: 2100000, guid: 3a71047eab6ac4bda8ace83bb44390d4, type: 2}
+  green: {fileID: 2100000, guid: e379d1526190f4d08aeba20aced74ab4, type: 2}
+  grey: {fileID: 2100000, guid: 309ec36c9686841489c2c8f3384886d6, type: 2}
+  nameText: {fileID: 365221872}
+--- !u!4 &242402463 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7879370884276114886, guid: f20777404c741184680ffac26e960917,
+    type: 3}
+  m_PrefabInstance: {fileID: 242402454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &264964417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1633,8 +1664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b60e1eedbd425c47b0a747ee91f933f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  Rotation: 1
+  Camera: {fileID: 242402463}
+  Rotation: 0
   SimulateInertia: 0
   RotationLerpSpeed: 5
 --- !u!114 &1032344289

@@ -278,6 +278,7 @@ MonoBehaviour:
   yellow: {fileID: 2100000, guid: 3a71047eab6ac4bda8ace83bb44390d4, type: 2}
   green: {fileID: 2100000, guid: e379d1526190f4d08aeba20aced74ab4, type: 2}
   grey: {fileID: 2100000, guid: 309ec36c9686841489c2c8f3384886d6, type: 2}
+  nameText: {fileID: 0}
 --- !u!1 &16
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,8 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaa7a5c8d43f4f429839e388125bf62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 90, y: 0, z: 0, w: 0}
 --- !u!114 &26
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,9 +580,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60270cf52a5e94998a5a335989159738, type: 3}
---- !u!4 &44907471 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 482300, guid: 60270cf52a5e94998a5a335989159738,
+--- !u!224 &44907471 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4211661913981847359, guid: 60270cf52a5e94998a5a335989159738,
     type: 3}
   m_PrefabInstance: {fileID: 44907470}
   m_PrefabAsset: {fileID: 0}
@@ -1586,7 +1585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1366459648
 MonoBehaviour:
   m_ObjectHideFlags: 0

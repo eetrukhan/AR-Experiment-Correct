@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HiddenWaves.unity
     guid: 2453dc03c79a6b34d80db9f30e3744a3
+  - enabled: 1
+    path: Assets/Scenes/NewAroundStickers.unity
+    guid: 761bdbbf3dba0a34f9f8311a165215ff
   m_configObjects: {}
