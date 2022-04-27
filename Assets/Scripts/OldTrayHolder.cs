@@ -27,7 +27,7 @@ public class OldTrayHolder : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Ang: " + Camera.transform.rotation.eulerAngles.x + " " + (Camera.transform.rotation.eulerAngles.x < 180) + " " + (Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle)) + " " + TrayHideAngle);
+        //        Debug.Log("Ang: " + Camera.transform.rotation.eulerAngles.x + " " + (Camera.transform.rotation.eulerAngles.x < 180) + " " + (Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle)) + " " + TrayHideAngle);
         Vector3 posTo = Camera.transform.position;
         if (Camera.transform.rotation.eulerAngles.x < 180 && Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle))
         {
@@ -35,11 +35,12 @@ public class OldTrayHolder : MonoBehaviour
             return;
         }
 
-        if (SimulateInertia)
+  /*      if (SimulateInertia)
         {
             float posSpeed = Time.deltaTime * LerpSpeed;
-            transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
+           // transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
         }
+        */
         else
         {
             transform.position = posTo;

@@ -38,9 +38,9 @@ namespace Logic
             formFields.Add("entry.1870216573", NotificationsNumber.ToString()); //entry.1289494810
             formFields.Add("entry.1850179261", NumberOfHaveToActNotifications.ToString()); //entry.123982960
             formFields.Add("entry.1082228265", NumberOfNonIgnoredHaveToActNotifications.ToString()); //entry.1215856783
-            formFields.Add("entry.1255739382", SumOfReactionTimeToNonIgnoredHaveToActNotifications.ToString()); //entry.1734028322
+            formFields.Add("entry.1255739382", (SumOfReactionTimeToNonIgnoredHaveToActNotifications/TimeSpan.TicksPerSecond).ToString()); //entry.1734028322
             formFields.Add("entry.102635401", NumberOfInCorrectlyActedNotifications.ToString()); //entry.588295555
-            formFields.Add("entry.1374584132",sumOfAllReactionTime.ToString());
+            formFields.Add("entry.1374584132",(sumOfAllReactionTime/TimeSpan.TicksPerSecond).ToString());
             formFields.Add("entry.1311894071",numberOfCorrectReactedNaveToHideNotifications.ToString());
             return formFields;
         }

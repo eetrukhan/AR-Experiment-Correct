@@ -27,8 +27,8 @@ public class MenuController : MonoBehaviour
             Int32.TryParse(notificationsNumber.text, out ExperimentData.notificationsNumber);
             Int32.TryParse(numberOfHaveToActNotifications.text, out ExperimentData.numberOfHaveToActNotifications);
             Int32.TryParse(trialsNumber.text, out ExperimentData.trialsNumber);
-            ExperimentData.notificationSource = notificationSource.text;
-            ExperimentData.notificationAuthor = notificationAuthor.text;
+            //ExperimentData.notificationSource = notificationSource.text;
+            //ExperimentData.notificationAuthor = notificationAuthor.text;
             string text = headerText.text.Split(':')[1].Trim().Replace("\"", "");
             switch (text)
             {

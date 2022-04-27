@@ -11,9 +11,9 @@ namespace Logic
         }
 
         public Stack<Notification> Storage
-        {
-            get; set;
-        }
+                 {
+                     get; set;
+                 }
 
         public long LatestTimestamp
         {

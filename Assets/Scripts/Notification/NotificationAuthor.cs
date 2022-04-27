@@ -4,7 +4,29 @@ namespace Logic
 {
     public enum NotificationAuthor
     {
-      /*  [Description("Маша")]
+        [Description("Миша")]
+        text1,
+        [Description("Витя")]
+        text2,
+        [Description("Тима")]
+        text3,
+        [Description("Гоша")]
+        text4,
+        [Description("Коля")]
+        text5,
+        [Description("Маша")]
+        text6,
+        [Description("Вика")]
+        text7,
+        [Description("Таня")]
+        text8,
+        [Description("Галя")]
+        text9,
+        [Description("Катя")]
+        text10
+
+        /*
+        [Description("Маша")]
         text1,
         [Description("Вика")]
         text2,
@@ -23,7 +45,7 @@ namespace Logic
         [Description("Миша")]
         text9,
         [Description("Витя")]
-        text10
+        text10,
          [Description("Тима")]
         text11,
         [Description("Гоша")]
@@ -36,7 +58,8 @@ namespace Logic
         text15,
         [Description("Леша")]
         text16
-        */
+        
+      
          [Description("Александр")]
          text1,
          [Description("Алексей")]
@@ -57,5 +80,6 @@ namespace Logic
          text9,
          [Description("Виктория")]
          text10
+         */
     }
 }

@@ -116,6 +116,59 @@ namespace Logic
             var storage = FindObjectOfType<Storage>();
             Dictionary<string, NotificationsStorage> orderedNotifications = storage.getStorage();
             clearScene();
+            var coordinates = notificationCoordinates();
+            var trayCoordinates = traysCoordinates();
+            var trayCoordinatesIndex = 0;
+            int groupIndex = 0;
+            int columnIndex = 1;
+            int notififcationsNumberInTraysColumnNow = 0;
+            foreach (KeyValuePair<string, NotificationsStorage> notificationGroup in orderedNotifications)
+            {
+                Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
+                int usualCoordinatesIndex = groupIndex * notificationsInColumn;
+                //for (int i = groupNotifications.Count-1; i >=0; i--)
+                for (int i = 0; i < groupNotifications.Count; i++)
+                {
+                    Notification notificationInGroup = groupNotifications.ToArray()[i];
+                    //if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
+                    {
+                        bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || trayCoordinatesIndex == columnIndex * GlobalCommon.notificationsInColumnTray - 1;
+                        Vector3 position = coordinates[usualCoordinatesIndex].Position;//trayCoordinates[trayCoordinatesIndex].Position;
+                        Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x, coordinates[usualCoordinatesIndex].Rotation.y, coordinates[usualCoordinatesIndex].Rotation.z); //Quaternion.Euler(trayCoordinates[trayCoordinatesIndex].Rotation.x, trayCoordinates[trayCoordinatesIndex].Rotation.y, trayCoordinates[trayCoordinatesIndex].Rotation.z);
+                        Vector3 scale = coordinates[usualCoordinatesIndex].Scale; //trayCoordinates[trayCoordinatesIndex].Scale;
+                        GameObject trayN = notificationGenerator(trayNotification,
+                                              notificationInGroup,
+                                              position,
+                                              scale,
+                                              rotation,
+                                              doesHaveGroupIconTray);
+                        try
+                        {
+                            //trayN.transform.parent = trayHolder.transform;
+                            trayN.transform.SetParent(trayHolder.transform);
+                            //trayN.transform.localPosition = position;
+                            //trayN.transform.localRotation = rotation;
+                            usualCoordinatesIndex += 1;
+                        }
+                        catch (Exception e)
+                        {
+                            clearScene();
+                        }
+                        trayCoordinatesIndex += 1;
+                        notififcationsNumberInTraysColumnNow += 1;
+                        if (notififcationsNumberInTraysColumnNow == GlobalCommon.notificationsInColumnTray)
+                        {
+                            notififcationsNumberInTraysColumnNow = 0;
+                            columnIndex += 1;
+                        }
+                    }
+                }
+                groupIndex += 1;
+            }
+            /*
+            var storage = FindObjectOfType<Storage>();
+            Dictionary<string, NotificationsStorage> orderedNotifications = storage.getStorage();
+            clearScene();
             List<Coordinates> coordinates = notificationCoordinates();
             List<Coordinates> trayCoordinates = traysCoordinates();
             int trayCoordinatesIndex = 0;
@@ -143,15 +196,18 @@ namespace Logic
                                               rotation,
                                               doesHaveGroupIconTray);
                         try
-                        { 
+                        {
                             //trayN.transform.parent = trayHolder.transform;
                             //trayN.transform.localPosition = position;
                             //trayN.transform.localRotation = rotation;
-                            
+
                             trayN.transform.SetParent(trayHolder.transform);
                             usualCoordinatesIndex += 1;
                         }
-                        catch (Exception e) {  }
+                        catch (Exception e)
+                        {
+                            clearScene();
+                        }
                         trayCoordinatesIndex += 1;
                         notififcationsNumberInTraysColumnNow += 1;
                         if (notififcationsNumberInTraysColumnNow == GlobalCommon.notificationsInColumnTray)
@@ -160,6 +216,7 @@ namespace Logic
                             columnIndex += 1;
                         }
                     }
+                    */
                   /*  if (i < notificationsInColumn
                         && trayHolder != null
                         && !trayHolder.activeSelf
@@ -183,10 +240,11 @@ namespace Logic
                         n.transform.localRotation = rotation;
                         usualCoordinatesIndex += 1;
                     }
-                    */
+                    
                 }
                 groupIndex += 1;
             }
+            */
         }
 
         private GameObject addStickerNotification(GameObject prefabToCreate, Notification notification,

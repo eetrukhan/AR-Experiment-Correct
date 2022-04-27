@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Logic
 {
@@ -33,7 +34,7 @@ namespace Logic
         public override string ToString()
         {
             return string.Format("id: {0}; sourceImage: {1}; sourceName: {2}; author: {3}; icon: {4}; text: {5}; timestamp: {6}; silent: {7}; color: {8}; isCorrect: {9}",
-                                                                              id, sourceImage, sourceName, author, icon, text, timestamp, silent, color, isCorrect);
+                                                                              id, sourceImage, sourceName, author, icon, text, (timestamp/TimeSpan.TicksPerSecond), silent, color, isCorrect);
         }
 
         public string ToString(string design, string status, string reactionTime)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using UnityEngine;
 
 namespace Logic
@@ -112,7 +113,9 @@ namespace Logic
             }*/
             long timestamp = DateTime.Now.Ticks;
             Notification notification = new Notification(id, sourceImage, sourceName, author, icon, text, timestamp, isSilent, sourceColor, generateHaveToAct);
-            Debug.Log(string.Format("Notification which is {0} and has the following data: {1} was created", generateHaveToAct ? "correct" : "incorrect", notification));
+            string timestamp1 = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                CultureInfo.InvariantCulture);
+            Debug.Log(timestamp1 + " : "+ string.Format("Notification which is {0} and has the following data: {1} was created", generateHaveToAct ? "correct" : "incorrect", notification));
             return notification;
         }
     }

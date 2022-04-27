@@ -45,7 +45,8 @@ public class HeadReferencedContent : MonoBehaviour
         if (SimulateInertia && !AllowMotionAlongZAxis)
             _lastCameraPosition = Camera.transform.position;
 
-        Vector3 upwards = ParallelToTheGround ? Vector3.up : Camera.transform.up;
+        //Vector3 upwards = ParallelToTheGround ? Vector3.up : Camera.transform.up;
+        Vector3 upwards = new Vector3(0,0,0);
         transform.rotation = Quaternion.LookRotation(transform.position - Camera.transform.position, upwards);
     }
 
@@ -68,7 +69,12 @@ public class HeadReferencedContent : MonoBehaviour
             float posSpeed = Time.deltaTime * PositionLerpSpeed;
             Vector3 smoothedObjectOrientation = Quaternion.Slerp(currentRotation, requiredRotation, posSpeed) * (Vector3.forward * DistanceFromCamera);
 
-            transform.position = Camera.transform.position + smoothedObjectOrientation;
+            Vector3 v = Camera.transform.position + smoothedObjectOrientation;
+            v.y = Camera.transform.position.y - 0.5f;
+            
+            //transform.position = Camera.transform.position + smoothedObjectOrientation;
+            transform.position = v;
+           
 
             Vector3 upwards = ParallelToTheGround ? Vector3.up : Camera.transform.up;
             Quaternion rotTo = Quaternion.LookRotation(smoothedObjectOrientation, upwards);
@@ -93,7 +99,10 @@ public class HeadReferencedContent : MonoBehaviour
             }
             else
             {
-                transform.position = posTo;
+                Vector3 v = posTo;
+                v.y = Camera.transform.position.y - 0.5f;
+               // transform.position = posTo;
+               transform.position = v;
 
                 transform.rotation = rotTo;
             }

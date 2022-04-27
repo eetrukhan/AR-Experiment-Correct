@@ -27,7 +27,7 @@ public class TrayHolderReferencedContent : MonoBehaviour
 
     void Update()
     {
-//       Debug.Log("Ang: " + Camera.transform.rotation.eulerAngles.x + " " + (Camera.transform.rotation.eulerAngles.x < 180) + " " + (Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle)) + " " + TrayHideAngle);
+//      Debug.Log("Ang: " + Camera.transform.rotation.eulerAngles.x + " " + (Camera.transform.rotation.eulerAngles.x < 180) + " " + (Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle)) + " " + TrayHideAngle);
         Vector3 posTo = Camera.transform.position;
         if (Camera.transform.rotation.eulerAngles.x < 180 && Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(TrayHideAngle))
         {
@@ -37,15 +37,26 @@ public class TrayHolderReferencedContent : MonoBehaviour
             return;
         }
 
-      /*  if (SimulateInertia)
-        {
-            float posSpeed = Time.deltaTime * LerpSpeed;
-            transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
-        }
-        else
-        {
-            transform.position = posTo;
-        }
-        */
+        //
+        float DistanceFromCamera = 3f;
+        Vector3 AposTo = Camera.transform.position + (Camera.transform.forward * DistanceFromCamera);
+
+        bool ParallelToTheGround = true;
+        Vector3 upwards = ParallelToTheGround ? Vector3.up : Camera.transform.up;
+        Quaternion rotTo = Quaternion.LookRotation(transform.position - Camera.transform.position, upwards);
+        //
+        /*  if (SimulateInertia)
+          {
+              float posSpeed = Time.deltaTime * LerpSpeed;
+              transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
+          }
+          else
+          {
+              transform.position = posTo;
+          }
+          */
+      //transform.position = posTo;
+      transform.position = AposTo;
+
     }
 }

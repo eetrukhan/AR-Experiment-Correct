@@ -14,6 +14,8 @@ public class OldNotificationsHolder : MonoBehaviour
 
     [Tooltip("Angle when tray should be shown")]
     public float TrayShowAngle = 35f;
+    
+    private Vector3 minusPos = new Vector3(0,-3,0);
 
     void OnEnable()
     {
@@ -29,8 +31,9 @@ public class OldNotificationsHolder : MonoBehaviour
     {
         Vector3 posTo = Camera.transform.position + Camera.transform.forward * DistanceFromCamera;
         Quaternion rotTo = Quaternion.LookRotation(transform.position - Camera.transform.position);
+        transform.position = posTo+minusPos;
         transform.rotation = rotTo;
-        transform.position = posTo;
+        
     }
 
     void Update()
@@ -45,28 +48,32 @@ public class OldNotificationsHolder : MonoBehaviour
         if (transform.childCount == 0)
         {
             Vector3 posTo = Camera.transform.position + Camera.transform.forward * DistanceFromCamera;
+            //if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
             if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
             {
                 posTo.y = DistanceFromCamera * Mathf.Tan(Mathf.Deg2Rad * AngleToTheHorizon);
             }
+            transform.position = posTo + minusPos;
             transform.rotation = rotTo;
-            transform.position = posTo;
+            
         }
         else
         {
             Vector3 posTo = transform.position;
             Quaternion oldRotTo = transform.rotation;
-            if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
+            //if (Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
+            if ((Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
+                ||(Camera.transform.rotation.eulerAngles.x <= 180 && Camera.transform.rotation.eulerAngles.x < Mathf.Abs(AngleToTheHorizon)))
             {
                 posTo.y = DistanceFromCamera * Mathf.Tan(Mathf.Deg2Rad * AngleToTheHorizon);
-                transform.position = posTo;
+                transform.position = posTo + minusPos;
                 transform.rotation = oldRotTo;
             }
             else
             {
                 Vector3 posRealTo = Camera.transform.position + Camera.transform.forward * DistanceFromCamera;                
                 posTo.y = posRealTo.y;
-                transform.position = posTo;
+                transform.position = posTo + minusPos;
                 oldRotTo.x = rotTo.x;
                 transform.rotation = oldRotTo;
             }

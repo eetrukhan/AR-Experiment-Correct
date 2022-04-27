@@ -130,7 +130,9 @@ namespace Logic
             foreach (KeyValuePair<string, NotificationsStorage> notificationGroup in orderedNotifications)
             {
                 Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
-                for (int i = 0; i < groupNotifications.Count; i++)
+                
+                //for (int i = 0; i < groupNotifications.Count; i++)
+                for (int i = groupNotifications.Count-1; i >=0; i--)
                 {
                     Notification notificationInGroup = groupNotifications.ToArray()[i];
                     if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
@@ -150,7 +152,10 @@ namespace Logic
                             trayN.transform.localPosition = position;
                             trayN.transform.localRotation = rotation;
                         }
-                        catch (Exception e) { }
+                        catch (Exception e)
+                        {
+                            clearScene();
+                        }
                         trayCoordinatesIndex += 1;
                         notififcationsNumberInTraysColumnNow += 1;
                         if (notififcationsNumberInTraysColumnNow == GlobalCommon.notificationsInColumnTray)

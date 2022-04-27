@@ -115,10 +115,9 @@ namespace Logic
             var storage = FindObjectOfType<Storage>();
             Dictionary<string, NotificationsStorage> orderedNotifications = storage.getStorage();
             clearScene();
-            List<Coordinates> coordinates = notificationCoordinates();
-            List<Coordinates> trayCoordinates = traysCoordinates();
-            int trayCoordinatesIndex = 0;
-            int maxNotificationsInTray = GlobalCommon.notificationsInColumnTray * GlobalCommon.notificationColumnsTray;
+            var coordinates = notificationCoordinates();
+            var trayCoordinates = traysCoordinates();
+            var trayCoordinatesIndex = 0;
             int groupIndex = 0;
             int columnIndex = 1;
             int notififcationsNumberInTraysColumnNow = 0;
@@ -126,6 +125,7 @@ namespace Logic
             {
                 Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
                 int usualCoordinatesIndex = groupIndex * notificationsInColumn;
+                //for (int i = groupNotifications.Count-1; i >=0; i--)
                 for (int i = 0; i < groupNotifications.Count; i++)
                 {
                     Notification notificationInGroup = groupNotifications.ToArray()[i];
@@ -149,7 +149,10 @@ namespace Logic
                             //trayN.transform.localRotation = rotation;
                             usualCoordinatesIndex += 1;
                         }
-                        catch (Exception e) {  }
+                        catch (Exception e)
+                        {
+                            clearScene();
+                        }
                         trayCoordinatesIndex += 1;
                         notififcationsNumberInTraysColumnNow += 1;
                         if (notififcationsNumberInTraysColumnNow == GlobalCommon.notificationsInColumnTray)
@@ -158,31 +161,6 @@ namespace Logic
                             columnIndex += 1;
                         }
                     }
-                   /* if (i < notificationsInColumn
-                        && trayHolder != null
-                        && !trayHolder.activeSelf
-                        && notificationInGroup != null
-                        && !notificationInGroup.isMarkedAsRead
-                        && !notificationInGroup.isSilent) // usual case
-                    {
-                        bool doesHaveGroupIcon = i == 0;
-                        Vector3 position = coordinates[usualCoordinatesIndex].Position;
-                        Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x, coordinates[usualCoordinatesIndex].Rotation.y, coordinates[usualCoordinatesIndex].Rotation.z);
-                        Vector3 scale = coordinates[usualCoordinatesIndex].Scale;
-                        GameObject n = notificationGenerator(notification,
-                                              notificationInGroup,
-                                              position,
-                                              scale,
-                                              rotation,
-                                              doesHaveGroupIcon);
-                        // GameObject trayN = Instantiate(n); // suppose it's strange object without parent
-                        //n.transform.parent = notificationsHolder.transform;
-                        n.transform.SetParent(notificationsHolder.transform);
-                        //n.transform.localPosition = position;
-                        //n.transform.localRotation = rotation;
-                        usualCoordinatesIndex += 1;
-                    }
-                    */
                 }
                 groupIndex += 1;
             }
@@ -200,7 +178,7 @@ namespace Logic
             }
             else
             {
-                notificationObject.GetComponentsInChildren<MeshRenderer>()[10].gameObject.transform.localScale = new Vector3(0, 0, 0);
+                notificationObject.GetComponentsInChildren<MeshRenderer>()[10].gameObject.transform.localScale = new Vector3(60, 0, 0);
             }
             notificationObject.GetComponentsInChildren<TextMeshPro>()[0].text = notification.Text;
             notificationObject.GetComponentsInChildren<TextMeshPro>()[1].text = notification.Author;

@@ -31,7 +31,8 @@ public class WavesHolderReferencedContent : MonoBehaviour
             return;
         }
 
-        transform.position = Camera.transform.position + Camera.transform.forward;
-        transform.rotation = Quaternion.LookRotation(transform.position - Camera.transform.position);
+       Vector3 pos = Camera.transform.position + Camera.transform.forward; 
+       transform.position = pos;
+       transform.rotation = Quaternion.LookRotation(transform.position - Camera.transform.position);
     }
 }

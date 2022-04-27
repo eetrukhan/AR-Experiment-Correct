@@ -20,8 +20,9 @@ namespace Logic
         public static int correctAuthorIndex;
         private ArrayList boolsArrayList;
         private int numberOfNotification;
+        private float pauseSum = 0;
 
-        [SerializeField] private GameObject aroundObject;
+        //[SerializeField] private GameObject aroundObject;
         
         Array values;
 
@@ -40,6 +41,7 @@ namespace Logic
             isRunning = false;
             alreadyCorrect = 0;
             notificationIndex = 0;
+            pauseSum = 0;
             runningNums = new HashSet<int>();
             GameObject[] toClean = GameObject.FindGameObjectsWithTag("Notification");
             foreach (GameObject clean in toClean)
@@ -72,7 +74,7 @@ namespace Logic
                 Debug.LogError(e);
                 SceneManager.LoadScene("MainMenu");
             }
-            aroundObject.SetActive(true);
+            //aroundObject.SetActive(true);
         }
 
         public void Awake()
@@ -87,7 +89,7 @@ namespace Logic
         {
             if (isRunning && startPressed)
             {
-                aroundObject.SetActive(false);
+                //aroundObject.SetActive(false);
                 isRunning = false;
                 startPressed = false;
                 pause = ExperimentData.timeInSeconds / ExperimentData.notificationsNumber;
@@ -102,7 +104,7 @@ namespace Logic
         private IEnumerator Runner()
         {
             // Added pause formula
-            pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
+            pause = CountingPause(20, ExperimentData.timeInSeconds - 20,ExperimentData.notificationsNumber);
 
             
             Debug.Log("Started" + DateTime.Now);
@@ -122,12 +124,20 @@ namespace Logic
                     if (!runningNums.Contains(i))
                     {
                         runningNums.Add(i);
-                        Generator();                        
+                        Generator();
                     }
                      //
-                     pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
-
-                    yield return new WaitForSeconds(pause);
+                     if (i != ExperimentData.notificationsNumber - 1)
+                     {
+                         pause = CountingPause(20, ExperimentData.timeInSeconds - 20,ExperimentData.notificationsNumber);
+                     }
+                     else
+                     {
+                         pause = ExperimentData.timeInSeconds - pauseSum;
+                     }
+                    
+                     yield return new WaitForSeconds(pause);
+                     
                 }
                 SaveTrialData();
                 FindObjectOfType<Storage>().removeAllFromStorage();
@@ -141,7 +151,7 @@ namespace Logic
 
         private IEnumerator StartingPause()
         {
-            pause = CountingPause(5, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
+            pause = CountingPause(20, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
             yield return new WaitForSeconds(pause);
         }
 
@@ -211,15 +221,27 @@ namespace Logic
             FindObjectOfType<TrialDataStorage>().NextTrialExperiment(ExperimentData.subjectNumber, GlobalCommon.currentTypeName, ExperimentData.trialsNumber,
                     ExperimentData.timeInSeconds, ExperimentData.notificationsNumber,
                     ExperimentData.numberOfHaveToActNotifications, ExperimentData.numberOfNonIgnoredHaveToActNotifications,
-                    ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications, ExperimentData.numberOfInCorrectlyActedNotifications, ExperimentData.sumOfAllReactionTime,ExperimentData.numberOfCorrectReactedNaveToHideNotifications);
+                    ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications,
+                    ExperimentData.numberOfInCorrectlyActedNotifications,
+                    ExperimentData.sumOfAllReactionTime,ExperimentData.numberOfCorrectReactedNaveToHideNotifications);
+            
             FindObjectOfType<TrialDataStorage>().SaveExperimentData();
+            //clear data
+            ExperimentData.numberOfNonIgnoredHaveToActNotifications = 0;
+            ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications = 0;
+            ExperimentData.numberOfInCorrectlyActedNotifications = 0;
+            ExperimentData.sumOfAllReactionTime = 0;
+            ExperimentData.numberOfCorrectReactedNaveToHideNotifications = 0;
         }
 
         private float CountingPause(int notificationTime, int sessionTime, int notificationsNum)
         {
             float countedPause = 0;
             System.Random random = new System.Random();
-            countedPause = random.Next((int)Math.Ceiling(notificationTime / 2f), (int)Math.Ceiling(sessionTime / (float)notificationsNum));
+            //countedPause = random.Next((int)Math.Ceiling(notificationTime / 2f), (int)Math.Ceiling(sessionTime / (float)notificationsNum));
+            countedPause = random.Next(10, 20);
+            Debug.Log((int)Math.Ceiling(notificationTime / 2f)+ " L " + (int)Math.Ceiling(sessionTime / (float)notificationsNum));
+            pauseSum += countedPause;
             return countedPause;
         }
     }

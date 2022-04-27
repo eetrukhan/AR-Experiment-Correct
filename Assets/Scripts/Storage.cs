@@ -59,26 +59,25 @@ namespace Logic
 
         public Notification getFromStorage(string id, string sourceName)
         {
+           // Debug.Log("======================================================================================");
+            
+            foreach (var orderedNotificationsValue in orderedNotifications)
+            {
+                var res = "";
+                foreach (var notif in orderedNotificationsValue.Value.Storage)
+                {
+//                    Debug.Log("NPTIFICSTION " + notif.Author + " }}}}}}}} " + notif.Id);    
+                }
+                
+                
+            }
+            //Debug.Log("========================="+id+"====================================="+sourceName+"========================");
             if (orderedNotifications.ContainsKey(sourceName))
             {
-              
-                {  foreach (Notification notification in orderedNotifications[sourceName].Storage)
-                    if (notification.Id.Equals(id))
-                    {
-                        return notification;
-                    }
-                }
+                foreach (var notification in orderedNotifications[sourceName].Storage.Where(notification => notification.Id.Equals(id)))
+                    return notification;
             }
-            if (orderedNotifications.ContainsKey(GlobalCommon.silentGroupKey))
-            {
-                foreach (Notification notification in orderedNotifications[GlobalCommon.silentGroupKey].Storage)
-                {
-                    if (notification.Id.Equals(id))
-                    {
-                        return notification;
-                    }
-                }
-            }
+
             return null;
         }
 

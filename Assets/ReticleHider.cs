@@ -9,7 +9,7 @@ public class ReticleHider : MonoBehaviour
 
     [SerializeField] private GameObject reticle;
 
-    private int _reticleHideAngle = 0;
+    [SerializeField] private int _reticleHideAngle = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,8 @@ public class ReticleHider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Camera.transform.rotation.eulerAngles.x < 180 && Camera.transform.rotation.eulerAngles.x >= Mathf.Abs(_reticleHideAngle))
+        //Debug.Log(Camera.transform.eulerAngles.x);
+        if (Camera.transform.rotation.eulerAngles.x < 180 && Camera.transform.rotation.eulerAngles.x > _reticleHideAngle)
         {
             reticle.SetActive(false);
         }

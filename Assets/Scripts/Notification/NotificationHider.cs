@@ -6,6 +6,57 @@ using UnityEngine;
 
 public class NotificationHider : MonoBehaviour
 {
+    public float hideTimeOfTheNotificationAfterArrival = 20;
+    public GameObject id;
+
+    void Start()
+    {
+        //if (transform.parent != null && transform.parent.name != "TrayHolder")
+        {
+           // StartCoroutine(Destroyer());
+        }
+    }
+
+    private void Update()
+    {
+        string sourceName = transform.Find("Source").GetComponent<TextMeshPro>().text;
+        Notification n = FindObjectOfType<Storage>().getFromStorage(id.GetComponent<TextMeshPro>().text, sourceName);
+      //  Debug.Log(n.Timestamp +"   "+ DateTime.Now.AddSeconds(-hideTimeOfTheNotificationAfterArrival).Ticks);
+        if (n.Timestamp <= DateTime.Now.AddSeconds(-hideTimeOfTheNotificationAfterArrival).Ticks)
+        {
+            FindObjectOfType<Storage>().removeFromStorage(id.GetComponent<TextMeshPro>().text, sourceName, tag);
+            rebuildSwitcher();
+        }
+    }
+    static double ConvertToUnixTimestamp(DateTime date)
+    {
+        DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        TimeSpan diff = date - origin;
+        return Math.Floor(diff.TotalSeconds);
+    }
+
+    IEnumerator Destroyer()
+    {
+        Debug.Log(hideTimeOfTheNotificationAfterArrival + " : "+id.GetComponent<TextMeshPro>().text);
+        yield return new WaitForSeconds(hideTimeOfTheNotificationAfterArrival);
+        Debug.Log("Destroy " +id.GetComponent<TextMeshPro>().text);
+        string sourceName = transform.Find("Source").GetComponent<TextMeshPro>().text;
+        string tag = "MarkAsRead";
+        Notification n = FindObjectOfType<Storage>().getFromStorage(id.GetComponent<TextMeshPro>().text, sourceName);
+        Debug.Log("NOTIFICATION" + n);
+        //if (n != null)
+        {
+            if (n.isSilent)
+            {
+                sourceName = GlobalCommon.silentGroupKey;
+            }
+            FindObjectOfType<Storage>().removeFromStorage(id.GetComponent<TextMeshPro>().text, sourceName, tag);
+            rebuildSwitcher();
+        }
+    }
+    
+    
+    /*
     public float hideTimeOfTheNotificationAfterArrival;
     public GameObject id;
     private bool shouldBeDestroyed = false;
@@ -24,7 +75,7 @@ public class NotificationHider : MonoBehaviour
             else
                 StartCoroutine(Destroyer(timeDestroyed - timestamp));
         }
-        */
+        
     }
     void Start()
     {
@@ -62,6 +113,7 @@ public class NotificationHider : MonoBehaviour
         }
     }
 
+*/
     private void rebuildSwitcher()
     {
         switch (GlobalCommon.currentTypeName)

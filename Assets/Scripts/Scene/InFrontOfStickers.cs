@@ -142,7 +142,11 @@ namespace Logic
                             trayN.transform.localPosition = position;
                             trayN.transform.localRotation = rotation;
                         }
-                        catch (Exception e) {  }
+                        catch (Exception e)
+                        {
+                            // ignored
+                        }
+
                         trayCoordinatesIndex += 1;
                         notififcationsNumberInTraysColumnNow += 1;
                         if (notififcationsNumberInTraysColumnNow == GlobalCommon.notificationsInColumnTray)

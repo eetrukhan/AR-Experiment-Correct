@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Globalization;
 using TMPro;
 
 namespace Logic
@@ -31,6 +32,7 @@ namespace Logic
 
         internal void actionProcessLocalAction(GameObject notification, string tag)
         {
+//            Debug.Log("HERERERERERER");
             string id = notification.transform.Find("Id").GetComponent<TextMeshPro>().text;
             Color groupColor;
             if (!GlobalCommon.currentTypeName.Contains("Sticker"))
@@ -45,8 +47,17 @@ namespace Logic
                 notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
             var storage = FindObjectOfType<Storage>();
             Notification notificationObj = storage.getFromStorage(id, sourceName);
-            int a = processExperimentData(notificationObj, tag);
-            processHideAndMarkAsRead(id, sourceName, tag, a);
+            if (notificationObj == null)
+            {
+                Debug.Log(storage.getStorage().Values.Count);
+            }
+            else
+            {
+                Debug.Log("ok");
+                int a = processExperimentData(notificationObj, tag);
+                processHideAndMarkAsRead(id, sourceName, tag, a);
+            }
+            
         }
 
         internal void actionProcessGroup(GameObject notification, string tag)
@@ -64,8 +75,8 @@ namespace Logic
         internal int processExperimentData(Notification notification, string tag)
         {
             Debug.Log("fIRST");
-            //var storage = FindObjectOfType<Storage>();
-            //Notification notification = storage.getFromStorage(id, sourceName);
+           // var storage = FindObjectOfType<Storage>();
+           // Notification notification = storage.getFromStorage(id, sourceName);
             long reactionDuration = DateTime.Now.Ticks - notification.Timestamp;
             if (notification.isCorrect && tag == "MarkAsRead" )
             {
@@ -81,17 +92,20 @@ namespace Logic
             }
             else
             {
+                ExperimentData.sumOfAllReactionTime += reactionDuration;
                 ExperimentData.numberOfInCorrectlyActedNotifications += 1;
             }
-            string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", reactionDuration.ToString());
+            string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", (reactionDuration/TimeSpan.TicksPerSecond).ToString());
             FileSaver.saveToFile(logInfo);
             return 0;
         }
 
         internal void processHideAndMarkAsRead(string id, string sourceName, string tag, int a)
         {
-            Debug.Log("seond");
-            Debug.Log(string.Format("Notification with id {0} from source {1} was chosen to {2}", id, sourceName, tag));
+            Debug.Log("second");
+            string timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                CultureInfo.InvariantCulture);
+            Debug.Log(string.Format(timestamp + " : "+"Notification with id {0} from source {1} was chosen to {2}", id, sourceName, tag));
             var storage = FindObjectOfType<Storage>();
             storage.removeFromStorage(id, sourceName, tag);
             rebuildSwitcher();
@@ -99,6 +113,7 @@ namespace Logic
 
         internal void processHideAndMarkAsReadAll(string sourceName, string tag)
         {
+            
             Debug.Log(string.Format("Notifications from source {0} were chosen to {1}", sourceName, tag));
             var storage = FindObjectOfType<Storage>();
             storage.removeAllFromStorage(sourceName, tag);
@@ -121,7 +136,7 @@ namespace Logic
                         FindObjectOfType<AroundMobile>().rebuildScene();
                         break;
                     }
-                case "AroundStickers": {
+                case "NewAroundStickers": {
                         FindObjectOfType<AroundStickers>().rebuildScene();
                         break;
                     }
