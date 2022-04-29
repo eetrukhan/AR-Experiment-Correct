@@ -26,8 +26,8 @@ namespace Logic
             }
             var storage = FindObjectOfType<Storage>();
             Notification notificationObj = storage.getFromStorage(id, sourceName);
-            int a = processExperimentData(notificationObj, tag);
-            processHideAndMarkAsRead(id, sourceName, tag, a);
+            processExperimentData(notificationObj, tag);
+            processHideAndMarkAsRead(id, sourceName, tag);
         }
 
         internal void actionProcessLocalAction(GameObject notification, string tag)
@@ -54,14 +54,15 @@ namespace Logic
             else
             {
                 Debug.Log("ok");
-                int a = processExperimentData(notificationObj, tag);
-                processHideAndMarkAsRead(id, sourceName, tag, a);
+                processExperimentData(notificationObj, tag);
+                processHideAndMarkAsRead(id, sourceName, tag);
             }
             
         }
 
         internal void actionProcessGroup(GameObject notification, string tag)
         {
+            /*
             Color groupColor = notification.transform.GetComponent<MeshRenderer>().material.color;
             string sourceName = groupColor.Equals(Color.gray) ? GlobalCommon.silentGroupKey :
                 notification.transform.Find("Source").GetComponent<TextMeshPro>().text;
@@ -70,9 +71,10 @@ namespace Logic
             Notification notificationObj = storage.getFromStorage(id, sourceName);
             int a = processExperimentData(notificationObj, tag);
             processHideAndMarkAsReadAll(sourceName, tag);
+            */
         }
 
-        internal int processExperimentData(Notification notification, string tag)
+        internal void processExperimentData(Notification notification, string tag)
         {
             Debug.Log("fIRST");
            // var storage = FindObjectOfType<Storage>();
@@ -95,12 +97,12 @@ namespace Logic
                 ExperimentData.sumOfAllReactionTime += reactionDuration;
                 ExperimentData.numberOfInCorrectlyActedNotifications += 1;
             }
-            string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", (reactionDuration/TimeSpan.TicksPerSecond).ToString());
+            DateTime reactiondate = DateTime.Now;
+            string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", (((float)reactionDuration)/TimeSpan.TicksPerSecond).ToString(), reactiondate);
             FileSaver.saveToFile(logInfo);
-            return 0;
         }
 
-        internal void processHideAndMarkAsRead(string id, string sourceName, string tag, int a)
+        internal void processHideAndMarkAsRead(string id, string sourceName, string tag)
         {
             Debug.Log("second");
             string timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",

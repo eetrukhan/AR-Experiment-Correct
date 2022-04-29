@@ -83,11 +83,13 @@ public class GlobalAroundPlacer : MonoBehaviour
         }
 
         GlobalAround.position = transform.position;
+        GlobalAround.rotation = transform.rotation;
+        GlobalAround.rotY = transform.rotation.y;
         SavePosition();
     }
     
-    public void SavePosition(){
-		
+    public void SavePosition()
+    {
         Transform CurrentPlayerPosition = this.gameObject.transform;
 		
         PlayerPrefs.SetFloat("PosX", CurrentPlayerPosition.position.x); // т.к. автоматической работы 

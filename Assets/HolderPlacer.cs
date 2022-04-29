@@ -10,6 +10,7 @@ public class HolderPlacer : MonoBehaviour
     {
         anchor = GameObject.FindGameObjectWithTag("Anchor");
         transform.position = anchor.transform.position;
+        transform.rotation = anchor.transform.rotation;
     }
 
     // Update is called once per frame

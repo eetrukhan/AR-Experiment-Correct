@@ -111,8 +111,9 @@ namespace Logic
                 sourceColor = EnumDescription.getColor(EnumDescription.getDescription(NotificationColor.Silent));
                 sourceImage = "_silent_";
             }*/
-            long timestamp = DateTime.Now.Ticks;
-            Notification notification = new Notification(id, sourceImage, sourceName, author, icon, text, timestamp, isSilent, sourceColor, generateHaveToAct);
+            DateTime date =DateTime.Now;
+            long timestamp = date.Ticks;
+            Notification notification = new Notification(id, sourceImage, sourceName, author, icon, text, timestamp, isSilent, sourceColor, generateHaveToAct, date);
             string timestamp1 = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
                 CultureInfo.InvariantCulture);
             Debug.Log(timestamp1 + " : "+ string.Format("Notification which is {0} and has the following data: {1} was created", generateHaveToAct ? "correct" : "incorrect", notification));

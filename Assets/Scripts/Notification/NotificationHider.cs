@@ -13,12 +13,13 @@ public class NotificationHider : MonoBehaviour
     {
         //if (transform.parent != null && transform.parent.name != "TrayHolder")
         {
-           // StartCoroutine(Destroyer());
+            // StartCoroutine(Destroyer());
         }
     }
 
     private void Update()
     {
+        
         string sourceName = transform.Find("Source").GetComponent<TextMeshPro>().text;
         Notification n = FindObjectOfType<Storage>().getFromStorage(id.GetComponent<TextMeshPro>().text, sourceName);
       //  Debug.Log(n.Timestamp +"   "+ DateTime.Now.AddSeconds(-hideTimeOfTheNotificationAfterArrival).Ticks);

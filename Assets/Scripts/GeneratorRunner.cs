@@ -212,7 +212,7 @@ namespace Logic
 
         private void SaveLogData(Notification notification)
         {
-            string logInfo = notification.ToString(GlobalCommon.currentTypeName, "CREATED", "-");
+            string logInfo = notification.ToString(GlobalCommon.currentTypeName, "CREATED", "-", notification.Date);
             FileSaver.saveToFile(logInfo);
         }
 

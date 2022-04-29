@@ -7,6 +7,7 @@ namespace Logic
         //public Vector3 position;
         //public Quaternion rotation;
         public static Vector3 position;
-        public static Quaternion rotation = new Quaternion(90,0,0,0);
+        public static Quaternion rotation;
+        public static float rotY;
     }
 }

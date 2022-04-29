@@ -10,6 +10,7 @@ namespace Logic
         private string author;
         private string icon;
         private string text;
+        private DateTime date;
         private long timestamp;
         private bool silent;
         private Color color;
@@ -17,7 +18,7 @@ namespace Logic
         private bool correct;
         private bool markedAsRead; // also used for those notifications which was hiden after n seconds in the notifications hodler and no reaction
 
-        public Notification(string id, string sourceImage, string sourceName, string author, string icon, string text, long timestamp, bool silent, Color color, bool correct) { 
+        public Notification(string id, string sourceImage, string sourceName, string author, string icon, string text, long timestamp, bool silent, Color color, bool correct, DateTime date) { 
             this.sourceImage = sourceImage;
             this.sourceName = sourceName;
             this.author = author;
@@ -29,20 +30,25 @@ namespace Logic
             this.id = id;
             this.correct = correct;
             this.markedAsRead = false;
+            this.date = date;
         }
 
         public override string ToString()
         {
-            return string.Format("id: {0}; sourceImage: {1}; sourceName: {2}; author: {3}; icon: {4}; text: {5}; timestamp: {6}; silent: {7}; color: {8}; isCorrect: {9}",
-                                                                              id, sourceImage, sourceName, author, icon, text, (timestamp/TimeSpan.TicksPerSecond), silent, color, isCorrect);
+            return string.Format("id: {0}; sourceImage: {1}; sourceName: {2}; author: {3}; icon: {4}; text: {5}; timestamp: {6}; silent: {7}; color: {8}; isCorrect: {9}; Date: {10}",
+                                                                              id, sourceImage, sourceName, author, icon, text, (timestamp/TimeSpan.TicksPerSecond), silent, color, isCorrect, date.ToString("MM/dd/yyyy HH:mm:ss.fff"));
         }
 
-        public string ToString(string design, string status, string reactionTime)
+        public string ToString(string design, string status, string reactionTime, DateTime reactionDate)
         {
-            return string.Format("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}; {8}; {9}; {10}; {11}; {12}; {13}; {14}",
-                                                                              ExperimentData.subjectNumber, design, ExperimentData.trialsNumber, id, sourceImage, sourceName, author, icon, text, timestamp, silent, color, isCorrect, status, reactionTime);
+            return string.Format("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}; {8}; {9}; {10}; {11}; {12}; {13}; {14}; {15}",
+                                                                              ExperimentData.subjectNumber, design, ExperimentData.trialsNumber, id, sourceImage, sourceName, author, icon, text, (timestamp/TimeSpan.TicksPerSecond), silent, color, isCorrect, status, reactionTime, reactionDate.ToString("MM/dd/yyyy HH:mm:ss.fff"));
         }
 
+        public DateTime Date
+        {
+            get { return date; }
+        }
         public string Id
         {
             get
