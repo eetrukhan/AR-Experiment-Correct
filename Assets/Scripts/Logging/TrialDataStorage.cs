@@ -64,7 +64,30 @@ namespace Logic
                 return _storedTrialData.Count > 0;
             return false;
         }
+        public void NextTrialExperiment(int SubjectNumber, string Design, int TrialNumber, float Time,
+            int NotificationsNumber, int NumberOfHaveToActNotifications, float SumOfReactionTimeOnDesiredNotifications,
+            float SumOfReactionTimeOnUnnecessaryNotifications, int NumberOfCorrectReactedDesiredNotifications,
+            int NumberOfCorrectReactedUnnecessaryNotifications, int NumberOfMissedDesiredNotifications, int NumberOfMissedUnnecessaryNotifications)
+        {
+            // Fool proffing
+            if (_currentTrialData != null)
+                _storedTrialData.Enqueue(_currentTrialData);
 
+            _currentTrialData = new TrialData();
+            _currentTrialData.SubjectNumber = SubjectNumber;
+            _currentTrialData.Design = Design;
+            _currentTrialData.TrialNumber = TrialNumber;
+            _currentTrialData.Time = Time;
+            _currentTrialData.NotificationsNumber = NotificationsNumber;
+            _currentTrialData.NumberOfHaveToActNotifications = NumberOfHaveToActNotifications;
+            _currentTrialData.SumOfReactionTimeOnDesiredNotifications = SumOfReactionTimeOnDesiredNotifications;
+            _currentTrialData.SumOfReactionTimeOnUnnecessaryNotifications = SumOfReactionTimeOnUnnecessaryNotifications;
+            _currentTrialData.NumberOfCorrectReactedDesiredNotifications = NumberOfCorrectReactedDesiredNotifications;
+            _currentTrialData.NumberOfCorrectReactedUnnecessaryNotifications = NumberOfCorrectReactedUnnecessaryNotifications;
+            _currentTrialData.NumberOfMissedDesiredNotifications = NumberOfMissedDesiredNotifications;
+            _currentTrialData.NumberOfMissedUnnecessaryNotifications = NumberOfMissedUnnecessaryNotifications;
+        }
+/*
         public void NextTrialExperiment(int SubjectNumber, string Design, int TrialNumber, float Time,
             int NotificationsNumber, int NumberOfHaveToActNotifications, int NumberOfNonIgnoredHaveToActNotifications,
             float SumOfReactionTimeToNonIgnoredHaveToActNotifications, int NumberOfInCorrectlyActedNotifications,
@@ -87,6 +110,7 @@ namespace Logic
             _currentTrialData.sumOfAllReactionTime = SumOfAllReactionTime;
             _currentTrialData.numberOfCorrectReactedNaveToHideNotifications = NumberOfCorrectReactedHaveToHideNotifications;
         }
+        */
 
         public void SaveExperimentData()
         {

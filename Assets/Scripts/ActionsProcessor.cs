@@ -77,14 +77,69 @@ namespace Logic
         internal void processExperimentData(Notification notification, string tag)
         {
             Debug.Log("fIRST");
+            // var storage = FindObjectOfType<Storage>();
+            // Notification notification = storage.getFromStorage(id, sourceName);
+            long reactionDuration = DateTime.Now.Ticks - notification.Timestamp;
+            
+            
+            if (notification.isCorrect && tag == "MarkAsRead" )
+            {
+                Debug.Log(1);
+                ExperimentData.NumberOfCorrectReactedDesiredNotifications += 1;
+                ExperimentData.SumOfReactionTimeOnDesiredNotifications += reactionDuration;
+                ExperimentData.NumberOfMissedDesiredNotifications -= 1;
+            } 
+            if (!notification.isCorrect && tag == "Hide")
+            {
+                Debug.Log(2);
+                ExperimentData.NumberOfCorrectReactedUnnecessaryNotifications += 1;
+                ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications += reactionDuration;
+                ExperimentData.NumberOfMissedUnnecessaryNotifications -= 1;
+            }
+            if (!notification.isCorrect && tag == "MarkAsRead")
+            {
+                Debug.Log(3);
+                ExperimentData.NumberOfMissedUnnecessaryNotifications -= 1;
+                ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications += reactionDuration;
+            }
+            if (notification.isCorrect && tag == "Hide")
+            {
+                Debug.Log(4);
+                ExperimentData.NumberOfMissedDesiredNotifications -= 1;
+                ExperimentData.SumOfReactionTimeOnDesiredNotifications += reactionDuration;
+            }
+            
+            DateTime reactiondate = DateTime.Now;
+            string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", (((float)reactionDuration)/TimeSpan.TicksPerSecond).ToString(), reactiondate);
+            FileSaver.saveToFile(logInfo);
+        }
+        
+        /*
+        internal void processExperimentData(Notification notification, string tag)
+        {
+            Debug.Log("fIRST");
            // var storage = FindObjectOfType<Storage>();
            // Notification notification = storage.getFromStorage(id, sourceName);
             long reactionDuration = DateTime.Now.Ticks - notification.Timestamp;
+            
+            
             if (notification.isCorrect && tag == "MarkAsRead" )
             {
                 ExperimentData.numberOfNonIgnoredHaveToActNotifications += 1;
                 ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications += reactionDuration;
                 ExperimentData.sumOfAllReactionTime += reactionDuration;
+            }
+            else if (!notification.isCorrect && tag == "Hide")
+            {
+                
+            }
+            else if (!notification.isCorrect && tag == "MarkAsRead")
+            {
+                
+            }
+            else if (notification.isCorrect && tag == "Hide")
+            {
+                
             }
             else if (tag == "Hide")
             {
@@ -101,6 +156,7 @@ namespace Logic
             string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", (((float)reactionDuration)/TimeSpan.TicksPerSecond).ToString(), reactiondate);
             FileSaver.saveToFile(logInfo);
         }
+        */
 
         internal void processHideAndMarkAsRead(string id, string sourceName, string tag)
         {

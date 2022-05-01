@@ -39,7 +39,7 @@ namespace Logic
             //Vector3 center = globalAround.position;
             //Quaternion rotation = globalAround.rotation;
             Vector3 center = GlobalAround.position;
-            Quaternion rotation =new Quaternion(60,GlobalAround.rotation.y,0,0);
+            Quaternion rotation =new Quaternion(60, GlobalAround.rotation.eulerAngles.y,0,0);
             List<Coordinates> coordinates = new List<Coordinates>();
             //float xDist = 0.15f;
             //float zDist = 0.05f;

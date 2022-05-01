@@ -220,18 +220,19 @@ namespace Logic
         {
             FindObjectOfType<TrialDataStorage>().NextTrialExperiment(ExperimentData.subjectNumber, GlobalCommon.currentTypeName, ExperimentData.trialsNumber,
                     ExperimentData.timeInSeconds, ExperimentData.notificationsNumber,
-                    ExperimentData.numberOfHaveToActNotifications, ExperimentData.numberOfNonIgnoredHaveToActNotifications,
-                    ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications,
-                    ExperimentData.numberOfInCorrectlyActedNotifications,
-                    ExperimentData.sumOfAllReactionTime,ExperimentData.numberOfCorrectReactedNaveToHideNotifications);
+                    ExperimentData.numberOfHaveToActNotifications, ExperimentData.SumOfReactionTimeOnDesiredNotifications,
+                    ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications,
+                    ExperimentData.NumberOfCorrectReactedDesiredNotifications,
+                    ExperimentData.NumberOfCorrectReactedUnnecessaryNotifications,ExperimentData.NumberOfMissedDesiredNotifications,ExperimentData.NumberOfMissedUnnecessaryNotifications);
             
             FindObjectOfType<TrialDataStorage>().SaveExperimentData();
             //clear data
-            ExperimentData.numberOfNonIgnoredHaveToActNotifications = 0;
-            ExperimentData.sumOfReactionTimeToNonIgnoredHaveToActNotifications = 0;
-            ExperimentData.numberOfInCorrectlyActedNotifications = 0;
-            ExperimentData.sumOfAllReactionTime = 0;
-            ExperimentData.numberOfCorrectReactedNaveToHideNotifications = 0;
+            ExperimentData.SumOfReactionTimeOnDesiredNotifications = 0;
+            ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications = 0;
+            ExperimentData.NumberOfCorrectReactedDesiredNotifications = 0;
+            ExperimentData.NumberOfCorrectReactedUnnecessaryNotifications = 0;
+            ExperimentData.NumberOfMissedDesiredNotifications = 2;
+            ExperimentData.NumberOfMissedUnnecessaryNotifications = 2;
         }
 
         private float CountingPause(int notificationTime, int sessionTime, int notificationsNum)
