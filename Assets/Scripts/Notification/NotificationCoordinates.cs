@@ -121,18 +121,18 @@ namespace Logic
             
             float xDist = 0.2f;
             float zDist = 0.18f;
+            Vector3 scale = new Vector3(0.15f,0.15f,0.15f); 
+            coordinates.Add(new Coordinates(new Vector3(center.x, center.y, center.z), rotation, scale));
+            coordinates.Add(new Coordinates(new Vector3(center.x + xDist, center.y, center.z), rotation, scale));
+            coordinates.Add(new Coordinates(new Vector3(center.x + xDist * 2, center.y, center.z), rotation, scale));
             
-            coordinates.Add(new Coordinates(new Vector3(center.x, center.y, center.z), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
-            coordinates.Add(new Coordinates(new Vector3(center.x + xDist, center.y, center.z), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
-            coordinates.Add(new Coordinates(new Vector3(center.x + xDist * 2, center.y, center.z), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
+            coordinates.Add(new Coordinates(new Vector3(center.x, center.y , center.z - zDist), rotation, scale));
+            coordinates.Add(new Coordinates(new Vector3(center.x + xDist, center.y , center.z - zDist), rotation, scale));
+            coordinates.Add(new Coordinates(new Vector3(center.x + xDist * 2, center.y , center.z - zDist), rotation, scale));
             
-            coordinates.Add(new Coordinates(new Vector3(center.x, center.y , center.z - zDist), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
-            coordinates.Add(new Coordinates(new Vector3(center.x + xDist, center.y , center.z - zDist), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
-            coordinates.Add(new Coordinates(new Vector3(center.x + xDist * 2, center.y , center.z - zDist), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
-            
-            coordinates.Add(new Coordinates(new Vector3(center.x, center.y , center.z - zDist * 2), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
-            coordinates.Add(new Coordinates(new Vector3(center.x + xDist, center.y , center.z - zDist * 2), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
-            coordinates.Add(new Coordinates(new Vector3(center.x + xDist * 2, center.y , center.z - zDist * 2), rotation, new Vector3(0.1f, 0.1f, 0.1f)));
+            coordinates.Add(new Coordinates(new Vector3(center.x, center.y , center.z - zDist * 2), rotation, scale));
+            coordinates.Add(new Coordinates(new Vector3(center.x + xDist, center.y , center.z - zDist * 2), rotation, scale));
+            coordinates.Add(new Coordinates(new Vector3(center.x + xDist * 2, center.y , center.z - zDist * 2), rotation, scale));
 
             /*
             coordinates.Add(new Coordinates(new Vector3(center.x, center.y, center.z), rotation, new Vector3(0.05f, 0.05f, 0.05f)));
@@ -161,14 +161,18 @@ namespace Logic
 
         public static List<Coordinates> formTrayCoordinatesArrayMobile()
         {
-            List<Coordinates> coordinates = new List<Coordinates>();
-            coordinates.Add(new Coordinates(new Vector3(0f, -2.2f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
-            coordinates.Add(new Coordinates(new Vector3(0f, -1.1f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
-            coordinates.Add(new Coordinates(new Vector3(0f, 0f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
-            coordinates.Add(new Coordinates(new Vector3(0f, 1.1f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
-            coordinates.Add(new Coordinates(new Vector3(0f, 2.2f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
+            List<Coordinates> coordinates = new List<Coordinates>();  
+            
+            Vector3 scale = new Vector3(0.15f,0.15f,0.15f); 
+            
+            coordinates.Add(new Coordinates(new Vector3(0f, 0f, 0), new Quaternion(0, 0, 0, 0),scale));
+            coordinates.Add(new Coordinates(new Vector3(0f, -0.2f, 0), new Quaternion(0, 0, 0, 0),scale));
+            coordinates.Add(new Coordinates(new Vector3(0f, 0f, 0), new Quaternion(0, 0, 0, 0), scale));
+            coordinates.Add(new Coordinates(new Vector3(0f, 1.1f, 0), new Quaternion(0, 0, 0, 0), scale));
+            coordinates.Add(new Coordinates(new Vector3(0f, 2.2f, 0), new Quaternion(0, 0, 0, 0), scale));
+            
         
-      /*   
+        
          coordinates.Add(new Coordinates(new Vector3(0f, 2.2f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
          coordinates.Add(new Coordinates(new Vector3(0f, 1.1f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
          coordinates.Add(new Coordinates(new Vector3(0f, 0f, 10), new Quaternion(0, 0, 0, 0), new Vector3(1f, 1f, 1f)));
