@@ -30,7 +30,7 @@ namespace Logic
                                           bool doesHaveGroupIcon);
 
         public delegate List<Coordinates> Coordinate();
-
+        
         public void Start()
         {
             EventManager.AddHandler(EVENT.NotificationCreated, rebuildScene);
@@ -41,7 +41,7 @@ namespace Logic
             
             DisplayName();
         }
-
+        
         private void DisplayName()
         {
             Array values = Enum.GetValues(typeof(NotificationAuthor));
@@ -50,18 +50,21 @@ namespace Logic
             nameText.text = author;
         }
         
+        
         private void hideTimer()
         {
             //UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(false);
             timer.SetActive(false);
         }
-
+        
+        
         private void showTimer()
         {
             //UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[14].SetActive(true);
             timer.SetActive(true);
         }
-
+        
+        
         private void showTray()
         {
             notificationsHolder.SetActive(false);
@@ -84,7 +87,7 @@ namespace Logic
             trayHolder.SetActive(false);
             notificationsHolder.SetActive(true);
         }
-
+        
         private void clearScene()
         {
             GameObject[] notificationsObjects = GameObject.FindGameObjectsWithTag("Notification");
@@ -122,6 +125,7 @@ namespace Logic
             int groupIndex = 0;
             int columnIndex = 1;
             int notififcationsNumberInTraysColumnNow = 0;
+            
             foreach (KeyValuePair<string, NotificationsStorage> notificationGroup in orderedNotifications)
             {
                 Stack<Notification> groupNotifications = notificationGroup.Value.Storage;

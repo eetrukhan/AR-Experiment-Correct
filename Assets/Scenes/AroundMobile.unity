@@ -383,6 +383,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1674050067}
+    - target: {fileID: 7879370885964853748, guid: f20777404c741184680ffac26e960917,
+        type: 3}
+      propertyPath: maxReticleDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f20777404c741184680ffac26e960917, type: 3}
 --- !u!20 &242402455 stripped

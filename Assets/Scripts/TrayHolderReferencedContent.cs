@@ -38,22 +38,22 @@ public class TrayHolderReferencedContent : MonoBehaviour
         }
 
         //
-        float DistanceFromCamera = 3f;
+        float DistanceFromCamera = 1f;
         Vector3 AposTo = Camera.transform.position + (Camera.transform.forward * DistanceFromCamera);
 
         bool ParallelToTheGround = true;
         Vector3 upwards = ParallelToTheGround ? Vector3.up : Camera.transform.up;
         Quaternion rotTo = Quaternion.LookRotation(transform.position - Camera.transform.position, upwards);
         //
-        /*  if (SimulateInertia)
-          {
+        /* if (SimulateInertia)
+           {
               float posSpeed = Time.deltaTime * LerpSpeed;
               transform.position = Vector3.SlerpUnclamped(transform.position, posTo, posSpeed);
-          }
-          else
-          {
+           }
+           else
+           {
               transform.position = posTo;
-          }
+           }
           */
       //transform.position = posTo;
       transform.position = AposTo;

@@ -7,7 +7,7 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
     public GameObject Camera;
 
     [Tooltip("The distance from the camera that this object should be placed")]
-    private float DistanceFromCamera = 10f; //10f
+    private float DistanceFromCamera = 1f; //10f
 
     [Tooltip("Angle to the horizon")]
     public float AngleToTheHorizon = 8f;   // ок на -11 было + чуть сдвинут сам холдер
@@ -15,7 +15,7 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
     [Tooltip("Angle when tray should be shown")]
     public float TrayShowAngle = 35f;
 
-    private Vector3 minusPos = new Vector3(0,-3,0);
+    private Vector3 minusPos = new Vector3(0,0f,0);
     void OnEnable()
     {
         if (Camera == null)

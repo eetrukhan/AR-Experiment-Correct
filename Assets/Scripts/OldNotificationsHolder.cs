@@ -7,7 +7,7 @@ public class OldNotificationsHolder : MonoBehaviour
     public GameObject Camera;
 
     [Tooltip("The distance from the camera that this object should be placed")]
-    private float DistanceFromCamera = 10f;
+    private float DistanceFromCamera = 1f;
 
     [Tooltip("Angle to the horizon")]
     public float AngleToTheHorizon = 8f;
@@ -15,7 +15,7 @@ public class OldNotificationsHolder : MonoBehaviour
     [Tooltip("Angle when tray should be shown")]
     public float TrayShowAngle = 35f;
     
-    private Vector3 minusPos = new Vector3(0,-3,0);
+    private Vector3 minusPos = new Vector3(0,0,0);
 
     void OnEnable()
     {

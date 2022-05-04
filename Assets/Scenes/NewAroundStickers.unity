@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 242402463}
   reticle: {fileID: 242402464}
-  _reticleHideAngle: 20
+  _reticleHideAngle: 25
 --- !u!1001 &264964417
 PrefabInstance:
   m_ObjectHideFlags: 0
