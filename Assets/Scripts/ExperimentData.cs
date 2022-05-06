@@ -18,7 +18,7 @@ namespace Logic
         
         public static float SumOfReactionTimeOnDesiredNotifications;
 
-        public static float SumOfReactionTimeOnUnnecessaryNotifications;
+        public static float SumOfDecisionMakingTime;
 
         public static int NumberOfCorrectReactedDesiredNotifications;
 

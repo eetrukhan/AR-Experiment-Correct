@@ -12,15 +12,18 @@ public class WaveMover : MonoBehaviour
 
     void Start()
     {
+        /*
         reachedEnd = false;
         startPos = transform.localPosition;
         finishPos = startPos;
         finishPos.x = startPos.x + 50;
+        */
         StartCoroutine(DeleteObject(gameObject, durationWave));
     }
 
     private void Update()
     {
+        /*
         float posSpeed = Time.deltaTime * speedWave;
         if (!reachedEnd)
         {
@@ -38,6 +41,7 @@ public class WaveMover : MonoBehaviour
                 reachedEnd = false;
             }
         }
+        */
     }
 
     IEnumerator DeleteObject(GameObject obj, float t)

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -113,11 +115,14 @@ namespace Logic
         {
             buildAround(addStickerNotification, NotificationCoordinates.formAroundStickerCoordinatesArray, NotificationCoordinates.formTrayCoordinatesArraySticker);
         }    
-
+        
         public void buildAround(Generator notificationGenerator, Coordinate notificationCoordinates, Coordinate traysCoordinates)
         {
+            
+            
             var storage = FindObjectOfType<Storage>();
             Dictionary<string, NotificationsStorage> orderedNotifications = storage.getStorage();
+            
             clearScene();
             var coordinates = notificationCoordinates();
             var trayCoordinates = traysCoordinates();
@@ -128,10 +133,19 @@ namespace Logic
             
             foreach (KeyValuePair<string, NotificationsStorage> notificationGroup in orderedNotifications)
             {
-                Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
+                List<Notification> groupNotifications = notificationGroup.Value.Storage.ToArray().ToList();
+                groupNotifications.Sort((not, ord) => not.Timestamp < ord.Timestamp? 1 : 0);
+                
+                
+                
+                
+
                 int usualCoordinatesIndex = groupIndex * notificationsInColumn;
+                //int usualCoordinatesIndex = 0;
                 //for (int i = groupNotifications.Count-1; i >=0; i--)
-                for (int i = 0; i < groupNotifications.Count; i++)
+                //for (int i = 0; i < groupNotifications.Count; i++)
+                //for (int i = groupNotifications.Count-1; i >=0; i--)
+                for (int i = groupNotifications.Count-1; i >=0; i--)
                 {
                     Notification notificationInGroup = groupNotifications.ToArray()[i];
                     //if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
@@ -169,9 +183,13 @@ namespace Logic
                 }
                 groupIndex += 1;
             }
+            
+            
             /*
+            
             var storage = FindObjectOfType<Storage>();
             Dictionary<string, NotificationsStorage> orderedNotifications = storage.getStorage();
+            
             clearScene();
             List<Coordinates> coordinates = notificationCoordinates();
             List<Coordinates> trayCoordinates = traysCoordinates();
@@ -189,16 +207,23 @@ namespace Logic
                     Notification notificationInGroup = groupNotifications.ToArray()[i];
                     //if (trayCoordinatesIndex < maxNotificationsInTray) // tray case
                     {
-                        bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || trayCoordinatesIndex == columnIndex * GlobalCommon.notificationsInColumnTray - 1;
-                        Vector3 position = coordinates[usualCoordinatesIndex].Position; //trayCoordinates[trayCoordinatesIndex].Position;
-                        Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x, coordinates[usualCoordinatesIndex].Rotation.y, coordinates[usualCoordinatesIndex].Rotation.z); // Quaternion.Euler(trayCoordinates[trayCoordinatesIndex].Rotation.x, trayCoordinates[trayCoordinatesIndex].Rotation.y, trayCoordinates[trayCoordinatesIndex].Rotation.z);
-                        Vector3 scale = coordinates[usualCoordinatesIndex].Scale; //trayCoordinates[trayCoordinatesIndex].Scale;
+                        bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || trayCoordinatesIndex ==
+                            columnIndex * GlobalCommon.notificationsInColumnTray - 1;
+                        Vector3 position =
+                            coordinates[usualCoordinatesIndex]
+                                .Position; //trayCoordinates[trayCoordinatesIndex].Position;
+                        Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x,
+                            coordinates[usualCoordinatesIndex].Rotation.y,
+                            coordinates[usualCoordinatesIndex].Rotation
+                                .z); // Quaternion.Euler(trayCoordinates[trayCoordinatesIndex].Rotation.x, trayCoordinates[trayCoordinatesIndex].Rotation.y, trayCoordinates[trayCoordinatesIndex].Rotation.z);
+                        Vector3 scale = coordinates[usualCoordinatesIndex]
+                            .Scale; //trayCoordinates[trayCoordinatesIndex].Scale;
                         GameObject trayN = notificationGenerator(trayNotification,
-                                              notificationInGroup,
-                                              position,
-                                              scale,
-                                              rotation,
-                                              doesHaveGroupIconTray);
+                            notificationInGroup,
+                            position,
+                            scale,
+                            rotation,
+                            doesHaveGroupIconTray);
                         try
                         {
                             //trayN.transform.parent = trayHolder.transform;
@@ -212,6 +237,7 @@ namespace Logic
                         {
                             clearScene();
                         }
+
                         trayCoordinatesIndex += 1;
                         notififcationsNumberInTraysColumnNow += 1;
                         if (notififcationsNumberInTraysColumnNow == GlobalCommon.notificationsInColumnTray)
@@ -220,35 +246,38 @@ namespace Logic
                             columnIndex += 1;
                         }
                     }
-                    */
-                  /*  if (i < notificationsInColumn
-                        && trayHolder != null
-                        && !trayHolder.activeSelf
-                        && notificationInGroup != null
-                        && !notificationInGroup.isMarkedAsRead
-                        && !notificationInGroup.isSilent) // usual case
-                    {
-                        bool doesHaveGroupIcon = i == 0;
-                        Vector3 position = coordinates[usualCoordinatesIndex].Position;
-                        Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x, coordinates[usualCoordinatesIndex].Rotation.y, coordinates[usualCoordinatesIndex].Rotation.z);
-                        Vector3 scale = coordinates[usualCoordinatesIndex].Scale;
-                        GameObject n = notificationGenerator(notification,
-                                              notificationInGroup,
-                                              position,
-                                              scale,
-                                              rotation,
-                                              doesHaveGroupIcon);
-                        GameObject trayN = Instantiate(n);
-                        n.transform.parent = notificationsHolder.transform;
-                        n.transform.localPosition = position;
-                        n.transform.localRotation = rotation;
-                        usualCoordinatesIndex += 1;
-                    }
-                    
                 }
-                groupIndex += 1;
             }
-            */
+            
+
+            /*  if (i < notificationsInColumn
+                  && trayHolder != null
+                  && !trayHolder.activeSelf
+                  && notificationInGroup != null
+                  && !notificationInGroup.isMarkedAsRead
+                  && !notificationInGroup.isSilent) // usual case
+              {
+                  bool doesHaveGroupIcon = i == 0;
+                  Vector3 position = coordinates[usualCoordinatesIndex].Position;
+                  Quaternion rotation = Quaternion.Euler(coordinates[usualCoordinatesIndex].Rotation.x, coordinates[usualCoordinatesIndex].Rotation.y, coordinates[usualCoordinatesIndex].Rotation.z);
+                  Vector3 scale = coordinates[usualCoordinatesIndex].Scale;
+                  GameObject n = notificationGenerator(notification,
+                                        notificationInGroup,
+                                        position,
+                                        scale,
+                                        rotation,
+                                        doesHaveGroupIcon);
+                  GameObject trayN = Instantiate(n);
+                  n.transform.parent = notificationsHolder.transform;
+                  n.transform.localPosition = position;
+                  n.transform.localRotation = rotation;
+                  usualCoordinatesIndex += 1;
+              }
+              
+          }
+          groupIndex += 1;
+      }
+      */
         }
 
         private GameObject addStickerNotification(GameObject prefabToCreate, Notification notification,

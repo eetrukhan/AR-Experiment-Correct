@@ -125,8 +125,8 @@ namespace Logic
             {
                 Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
                 int usualCoordinatesIndex = groupIndex * notificationsInColumn;
-                //for (int i = groupNotifications.Count-1; i >=0; i--)
-                for (int i = 0; i < groupNotifications.Count; i++)
+                //for (int i = 0; i < groupNotifications.Count; i++)
+                for (int i = groupNotifications.Count-1; i >=0; i--)
                 {
                     Notification notificationInGroup = groupNotifications.ToArray()[i];
                     //if (trayCoordinatesIndex < maxNotificationsInTray) // tray case

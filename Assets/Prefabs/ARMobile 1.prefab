@@ -1844,7 +1844,7 @@ GameObject:
   - component: {fileID: 1701019756079788042}
   - component: {fileID: 7317526467824931531}
   m_Layer: 5
-  m_Name: ARMobile
+  m_Name: ARMobile 1
   m_TagString: Notification
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2032,6 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65db9bbe53da04fb0a7c05868e131797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: {fileID: 0}
 --- !u!114 &7317526467824931531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2171,7 +2172,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 2.24
   m_renderer: {fileID: 4451843635428036908}
   m_meshFilter: {fileID: 1245016259445374106}
   m_TextComponent: {fileID: 8075821999002865407}
@@ -2351,7 +2352,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 2.24
   m_renderer: {fileID: 967193737704276477}
   m_meshFilter: {fileID: 7797660661964678561}
   m_TextComponent: {fileID: 6973684195316246571}
@@ -2718,7 +2719,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7646681562578602600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 1302317164609863452}
@@ -2727,7 +2728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1.483, y: -0.861}
+  m_AnchoredPosition: {x: 1.483, y: -0.855}
   m_SizeDelta: {x: 142.2363, y: 31.2769}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6045010065429095742

@@ -22,6 +22,8 @@ namespace Logic
         private int numberOfNotification;
         private float pauseSum = 0;
 
+        [SerializeField] private bool playSound;
+        [SerializeField] private AudioSource Audio;
         //[SerializeField] private GameObject aroundObject;
         
         Array values;
@@ -125,6 +127,8 @@ namespace Logic
                     {
                         runningNums.Add(i);
                         Generator();
+                        if(playSound)
+                            PlaySound();
                     }
                      //
                      if (i != ExperimentData.notificationsNumber - 1)
@@ -149,6 +153,11 @@ namespace Logic
             Stop();
         }
 
+        private void PlaySound()
+        {
+            Audio = GetComponent<AudioSource>();
+            Audio.Play(0);
+        }
         private IEnumerator StartingPause()
         {
             pause = CountingPause(20, ExperimentData.timeInSeconds,ExperimentData.notificationsNumber);
@@ -221,14 +230,14 @@ namespace Logic
             FindObjectOfType<TrialDataStorage>().NextTrialExperiment(ExperimentData.subjectNumber, GlobalCommon.currentTypeName, ExperimentData.trialsNumber,
                     ExperimentData.timeInSeconds, ExperimentData.notificationsNumber,
                     ExperimentData.numberOfHaveToActNotifications, ExperimentData.SumOfReactionTimeOnDesiredNotifications,
-                    ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications,
+                    ExperimentData.SumOfDecisionMakingTime,
                     ExperimentData.NumberOfCorrectReactedDesiredNotifications,
                     ExperimentData.NumberOfCorrectReactedUnnecessaryNotifications,ExperimentData.NumberOfMissedDesiredNotifications,ExperimentData.NumberOfMissedUnnecessaryNotifications);
             
             FindObjectOfType<TrialDataStorage>().SaveExperimentData();
             //clear data
             ExperimentData.SumOfReactionTimeOnDesiredNotifications = 0;
-            ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications = 0;
+            ExperimentData.SumOfDecisionMakingTime = 0;
             ExperimentData.NumberOfCorrectReactedDesiredNotifications = 0;
             ExperimentData.NumberOfCorrectReactedUnnecessaryNotifications = 0;
             ExperimentData.NumberOfMissedDesiredNotifications = 2;
@@ -240,7 +249,7 @@ namespace Logic
             float countedPause = 0;
             System.Random random = new System.Random();
             //countedPause = random.Next((int)Math.Ceiling(notificationTime / 2f), (int)Math.Ceiling(sessionTime / (float)notificationsNum));
-            countedPause = random.Next(10, 20);
+            countedPause = UnityEngine.Random.Range(10f,20f);
             Debug.Log((int)Math.Ceiling(notificationTime / 2f)+ " L " + (int)Math.Ceiling(sessionTime / (float)notificationsNum));
             pauseSum += countedPause;
             return countedPause;

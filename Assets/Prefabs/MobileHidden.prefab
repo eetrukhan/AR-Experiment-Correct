@@ -1871,7 +1871,7 @@ GameObject:
   - component: {fileID: 4654523067881845524}
   - component: {fileID: 7602777138094771718}
   m_Layer: 5
-  m_Name: Mobile
+  m_Name: MobileHidden
   m_TagString: Notification
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1956,8 +1956,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8802369, y: 0.7, z: 0.01}
-  m_Center: {x: 0.24011838, y: 0, z: 0}
+  m_Size: {x: 2.8862793, y: 0.7, z: 0.01}
+  m_Center: {x: 0.24313962, y: 0, z: 0}
 --- !u!114 &4071977889910469958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2051,12 +2051,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6458541884227280155}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26d3b886519be46ebb352b8b9e5485b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideTimeOfTheNotificationAfterArrival: 10
+  hideTimeOfTheNotificationAfterArrival: 20
   id: {fileID: 7434072145722171719}
 --- !u!114 &7602777138094771718
 MonoBehaviour:

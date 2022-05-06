@@ -1292,7 +1292,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 8176368af2de34b36b618c0e80c8b578, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1341,7 +1341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1.29, y: -0.664}
+  m_AnchoredPosition: {x: 1.29, y: -0.576}
   m_SizeDelta: {x: 103.2532, y: 19.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4225729577322862421
@@ -1960,8 +1960,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.2217896, y: 0.7, z: 0.010000001}
-  m_Center: {x: 0.41089475, y: 0, z: 0}
+  m_Size: {x: 2.8850281, y: 0.7, z: 0.010000001}
+  m_Center: {x: 0.24251401, y: 0, z: 0}
 --- !u!114 &8042537623760199082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,6 +1981,17 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2608814865625347761}
           m_MethodName: baseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1701019756079788042}
+          m_MethodName: OnCollision
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2046,6 +2057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65db9bbe53da04fb0a7c05868e131797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: {fileID: 8874952953839653605}
 --- !u!114 &7317526467824931531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,7 +2113,7 @@ GameObject:
   - component: {fileID: 4451843635428036908}
   - component: {fileID: 1245016259445374106}
   - component: {fileID: 8639817698547855178}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TMP SubMesh [LiberationSans SDF Material + LiberationSans SDF Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2717,7 +2729,7 @@ GameObject:
   - component: {fileID: 2808620401686681807}
   - component: {fileID: 1540325293537162294}
   - component: {fileID: 8075821999002865407}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}

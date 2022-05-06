@@ -17,9 +17,10 @@ public class MenuController : MonoBehaviour
     public TextMeshProUGUI notificationSource;
     public TextMeshProUGUI notificationAuthor;
     public InputField trialsNumber;
-
+    [SerializeField] private GameObject cube;
     public void StartNewSession()
     {
+        cube.SetActive(false);
         try
         {
             Int32.TryParse(subjectNumber.text, out ExperimentData.subjectNumber);

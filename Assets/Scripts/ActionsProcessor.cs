@@ -7,6 +7,22 @@ namespace Logic
 {
     public class ActionsProcessor : MonoBehaviour
     {
+        private bool reactionCounted = false;
+        private long decisionDuration;
+        [SerializeField] private TextMeshPro id;
+        public void OnCollision()
+        {
+            if (!reactionCounted)
+            {
+                var storage = FindObjectOfType<Storage>();
+                Notification notificationObj = storage.getFromStorage(id.text, "Telegram");
+                long reactionDuration = DateTime.Now.Ticks - notificationObj.Timestamp;
+                decisionDuration += reactionDuration;
+                reactionCounted = true;
+                Debug.Log("Reaction counted");
+            }
+        }
+
         internal void actionOpenSourceApplication(GameObject notification)
         {
             string id = notification.transform.Find("Id").GetComponent<TextMeshPro>().text;
@@ -80,7 +96,10 @@ namespace Logic
             // var storage = FindObjectOfType<Storage>();
             // Notification notification = storage.getFromStorage(id, sourceName);
             long reactionDuration = DateTime.Now.Ticks - notification.Timestamp;
-            
+
+            ExperimentData.SumOfDecisionMakingTime += decisionDuration;
+            reactionCounted = false;
+            Debug.Log("Reaction saved");
             
             if (notification.isCorrect && tag == "MarkAsRead" )
             {
@@ -93,14 +112,14 @@ namespace Logic
             {
                 Debug.Log(2);
                 ExperimentData.NumberOfCorrectReactedUnnecessaryNotifications += 1;
-                ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications += reactionDuration;
+                //ExperimentData.SumOfDecisionMakingTime += reactionDuration;
                 ExperimentData.NumberOfMissedUnnecessaryNotifications -= 1;
             }
             if (!notification.isCorrect && tag == "MarkAsRead")
             {
                 Debug.Log(3);
                 ExperimentData.NumberOfMissedUnnecessaryNotifications -= 1;
-                ExperimentData.SumOfReactionTimeOnUnnecessaryNotifications += reactionDuration;
+                //ExperimentData.SumOfDecisionMakingTime += reactionDuration;
             }
             if (notification.isCorrect && tag == "Hide")
             {
@@ -112,6 +131,7 @@ namespace Logic
             DateTime reactiondate = DateTime.Now;
             string logInfo = notification.ToString(GlobalCommon.currentTypeName, "REACTED", (((float)reactionDuration)/TimeSpan.TicksPerSecond).ToString(), reactiondate);
             FileSaver.saveToFile(logInfo);
+            
         }
         
         /*

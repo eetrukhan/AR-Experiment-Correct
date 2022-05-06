@@ -75,6 +75,5 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
                 transform.rotation = oldRotTo;
             }
         }
-        
     }
 }
