@@ -214,12 +214,18 @@ namespace Logic
                     int maxNotificationsInTray = GlobalCommon.notificationsInColumnTray * GlobalCommon.notificationColumnsTray;
                     foreach (KeyValuePair<string, NotificationsStorage> notificationGroup in orderedNotifications)
                     {
-                        Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
+                        List<Notification> groupNotifications = notificationGroup.Value.Storage.ToArray().ToList();
+                        groupNotifications.Sort((not, ord) => not.Timestamp > ord.Timestamp? 1 : 0);
+                        
+                        //Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
                         //for (int i = groupNotifications.Count-1; i >=0; i--)
+                        //for (int i = 0; i < groupNotifications.Count; i++)
+                        //for (int i = 0; i < groupNotifications.Count; i++)
                         for (int i = 0; i < groupNotifications.Count; i++)
                         {
                             Notification notification = groupNotifications.ToArray()[i];
-                            bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || indexPosition == columnIndex * GlobalCommon.notificationsInColumnTray - 1;
+                            //bool doesHaveGroupIconTray = i == groupNotifications.Count - 1 || indexPosition == columnIndex * GlobalCommon.notificationsInColumnTray - 1;
+                            bool doesHaveGroupIconTray = i == 0;
                             if (indexPosition < maxNotificationsInTray)
                             {
                                 Vector3 position = coordinates[indexPosition].Position;

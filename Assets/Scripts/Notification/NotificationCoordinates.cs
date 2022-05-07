@@ -17,7 +17,7 @@ namespace Logic
             Vector3 scale = new Vector3(0.15f,0.15f,0.15f);
            float dist = 0f;
            List<Coordinates> coordinates = new List<Coordinates>();
-           float startY = -0.1f;
+           float startY = 0.08f;
            float diff = 0.16f;
            coordinates.Add(new Coordinates(new Vector3(0f, startY, dist), new Quaternion(0, 0, 0, 0), scale));
            coordinates.Add(new Coordinates(new Vector3(0f, startY - diff, dist), new Quaternion(0, 0, 0, 0), scale));
@@ -32,7 +32,7 @@ namespace Logic
             
             //Vector3 scale = new Vector3(0.5f,0.5f,0.5f);
             float dist = 0f;
-            float startY = -0.1f;
+            float startY = 0.08f;
             float diff = 0.3f;
             List<Coordinates> coordinates = new List<Coordinates>();
              coordinates.Add(new Coordinates(new Vector3(0f, startY, dist), new Quaternion(0, 0, 0, 0), scale));
@@ -195,13 +195,13 @@ namespace Logic
             
             Vector3 scale = new Vector3(0.15f,0.15f,0.15f); 
             
-            float startY = 0.0f;
-            float diff = 0.12f;
+            float startY = 0f;
+            float diff = 0.13f;
             
-            coordinates.Add(new Coordinates(new Vector3(0f, startY, 0), new Quaternion(0, 0, 0, 0),scale));
             coordinates.Add(new Coordinates(new Vector3(0f, startY + diff, 0), new Quaternion(0, 0, 0, 0),scale));
-            coordinates.Add(new Coordinates(new Vector3(0f, startY + 2*diff, 0), new Quaternion(0, 0, 0, 0), scale));
-            coordinates.Add(new Coordinates(new Vector3(0f, startY + 3*diff, 0), new Quaternion(0, 0, 0, 0), scale));
+            coordinates.Add(new Coordinates(new Vector3(0f, startY, 0), new Quaternion(0, 0, 0, 0),scale));
+            coordinates.Add(new Coordinates(new Vector3(0f, startY - diff, 0), new Quaternion(0, 0, 0, 0), scale));
+            coordinates.Add(new Coordinates(new Vector3(0f, startY - 2*diff, 0), new Quaternion(0, 0, 0, 0), scale));
             coordinates.Add(new Coordinates(new Vector3(0f, 2.2f, 0), new Quaternion(0, 0, 0, 0), scale));
             
         

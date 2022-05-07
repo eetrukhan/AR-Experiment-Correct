@@ -17,6 +17,9 @@ namespace Logic
         private string id;
         private bool correct;
         private bool markedAsRead; // also used for those notifications which was hiden after n seconds in the notifications hodler and no reaction
+        public bool reactionCounted;
+        public long reactionTime;
+        
 
         public Notification(string id, string sourceImage, string sourceName, string author, string icon, string text, long timestamp, bool silent, Color color, bool correct, DateTime date) { 
             this.sourceImage = sourceImage;
@@ -31,6 +34,7 @@ namespace Logic
             this.correct = correct;
             this.markedAsRead = false;
             this.date = date;
+            this.reactionCounted = false;
         }
 
         public override string ToString()

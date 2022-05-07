@@ -70,6 +70,7 @@ namespace Logic
             }
             hide.SetActive(true);
             markAsRead.SetActive(true);
+            FindObjectOfType<ActionsProcessor>().ReactionCount(notification);
         }
 
         public void baseExit()

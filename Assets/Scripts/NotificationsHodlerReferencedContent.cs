@@ -51,7 +51,7 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
                 posTo.y = DistanceFromCamera * Mathf.Tan(Mathf.Deg2Rad * AngleToTheHorizon);
             }
             transform.rotation = rotTo;
-            transform.position = posTo + minusPos ; // 
+            transform.position = posTo; //+ minusPos ; // 
         }
         else
         {
@@ -62,15 +62,15 @@ public class NotificationsHodlerReferencedContent : MonoBehaviour
             if ((Camera.transform.rotation.eulerAngles.x > 180 && Mathf.Abs(Camera.transform.rotation.eulerAngles.x - 360) > AngleToTheHorizon)
                 ||(Camera.transform.rotation.eulerAngles.x <= 180 && Camera.transform.rotation.eulerAngles.x < Mathf.Abs(AngleToTheHorizon)))
             {
-                posTo.y = DistanceFromCamera * Mathf.Tan(Mathf.Deg2Rad * AngleToTheHorizon);
-                transform.position = posTo + minusPos; //
+                //posTo.y = DistanceFromCamera * Mathf.Tan(Mathf.Deg2Rad * AngleToTheHorizon);
+                transform.position = posTo; //+ minusPos; //
                 transform.rotation = oldRotTo;
             }
             else
             {
                 Vector3 posRealTo = Camera.transform.position + Camera.transform.forward * DistanceFromCamera;                
                 posTo.y = posRealTo.y;
-                transform.position = posTo + minusPos;//
+                transform.position = posTo; //+ minusPos;//
                 oldRotTo.x = rotTo.x;
                 transform.rotation = oldRotTo;
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -123,7 +124,11 @@ namespace Logic
             int notififcationsNumberInTraysColumnNow = 0;
             foreach (KeyValuePair<string, NotificationsStorage> notificationGroup in orderedNotifications)
             {
-                Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
+                
+                List<Notification> groupNotifications = notificationGroup.Value.Storage.ToArray().ToList();
+                groupNotifications.Sort((not, ord) => not.Timestamp < ord.Timestamp? 1 : 0);
+                
+                //Stack<Notification> groupNotifications = notificationGroup.Value.Storage;
                 int usualCoordinatesIndex = groupIndex * notificationsInColumn;
                 //for (int i = 0; i < groupNotifications.Count; i++)
                 for (int i = groupNotifications.Count-1; i >=0; i--)

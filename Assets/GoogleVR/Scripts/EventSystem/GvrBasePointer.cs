@@ -847,7 +847,7 @@ public abstract class GvrBasePointer : MonoBehaviour, IGvrControllerInputDeviceR
             {
                 if (Input.GetButton("Fire1"))
                 {
-                    Debug.Log("1Fire1");
+//                    Debug.Log("1Fire1");
                 }
                 if (Input.GetButton("Fire2"))
                 {

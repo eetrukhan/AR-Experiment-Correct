@@ -7,20 +7,26 @@ namespace Logic
 {
     public class ActionsProcessor : MonoBehaviour
     {
-        private bool reactionCounted = false;
-        private long decisionDuration;
-        [SerializeField] private TextMeshPro id;
-        public void OnCollision()
+        //[SerializeField] private TextMeshPro id;
+        public void ReactionCount(GameObject notification)
         {
-            if (!reactionCounted)
+            string id = notification.transform.Find("Id").GetComponent<TextMeshPro>().text;
+            var storage = FindObjectOfType<Storage>();
+            Notification notificationObj = storage.getFromStorage(id, "Telegram");
+            if (!notificationObj.reactionCounted)
             {
-                var storage = FindObjectOfType<Storage>();
-                Notification notificationObj = storage.getFromStorage(id.text, "Telegram");
+                //var storage = FindObjectOfType<Storage>();
+                //Notification notificationObj = storage.getFromStorage(id.text, "Telegram");
                 long reactionDuration = DateTime.Now.Ticks - notificationObj.Timestamp;
-                decisionDuration += reactionDuration;
-                reactionCounted = true;
-                Debug.Log("Reaction counted");
+                notificationObj.reactionTime += reactionDuration;
+                notificationObj.reactionCounted = true;
+                Debug.Log(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                    CultureInfo.InvariantCulture) + " Reaction counted");
             }
+        }
+
+        private void Awake() {
+            
         }
 
         internal void actionOpenSourceApplication(GameObject notification)
@@ -48,7 +54,7 @@ namespace Logic
 
         internal void actionProcessLocalAction(GameObject notification, string tag)
         {
-//            Debug.Log("HERERERERERER");
+//           Debug.Log("HERERERERERER");
             string id = notification.transform.Find("Id").GetComponent<TextMeshPro>().text;
             Color groupColor;
             if (!GlobalCommon.currentTypeName.Contains("Sticker"))
@@ -97,9 +103,9 @@ namespace Logic
             // Notification notification = storage.getFromStorage(id, sourceName);
             long reactionDuration = DateTime.Now.Ticks - notification.Timestamp;
 
-            ExperimentData.SumOfDecisionMakingTime += decisionDuration;
-            reactionCounted = false;
-            Debug.Log("Reaction saved");
+            ExperimentData.SumOfDecisionMakingTime += notification.reactionTime;
+            Debug.Log(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                CultureInfo.InvariantCulture) + "Reaction saved");
             
             if (notification.isCorrect && tag == "MarkAsRead" )
             {
